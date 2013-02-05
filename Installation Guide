@@ -26,3 +26,4 @@ Solved the compiling problem for Gstreamer
 Befose using GStreamer we must export the environement variable:
 
 $export ARTOOLKIT_CONFIG="v4l2src device=/dev/video0 use-fixed-fps=false ! ffmpegcolorspace ! identity name=artoolkit ! fakesink"
+

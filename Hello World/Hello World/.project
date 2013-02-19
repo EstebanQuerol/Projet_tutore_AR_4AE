@@ -79,4 +79,11 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>SRC</name>
+			<type>2</type>
+			<location>/media/7954AD1876DA1529/Documentos/Clase/Segundo semestre/Projet tutoré/Git/Projet_tutore_AR_4AE/ARToolKit/lib/SRC</location>
+		</link>
+	</linkedResources>
 </projectDescription>

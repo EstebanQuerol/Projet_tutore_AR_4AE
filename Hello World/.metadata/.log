@@ -340,3 +340,12 @@ java.lang.ClassCastException: org.eclipse.egit.ui.internal.repository.tree.Folde
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:622)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:577)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-02-19 20:51:21.154
+!MESSAGE Indexed 'Test' (0 sources, 8 headers) in 0,17 sec: 0 declarations; 0 references; 8 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-02-19 20:55:29.740
+!MESSAGE Indexed 'Hello World' (1 sources, 23 headers) in 1,89 sec: 11.870 declarations; 16.746 references; 43 unresolved inclusions; 362 syntax errors; 189 unresolved names (0,66%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2013-02-19 20:56:01.419
+!MESSAGE Indexed 'Hello World' (1 sources, 30 headers) in 2,44 sec: 12.434 declarations; 16.961 references; 39 unresolved inclusions; 386 syntax errors; 219 unresolved names (0,74%)

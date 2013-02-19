@@ -207,7 +207,7 @@ int  arVideoSetupDevice2( int            dev_id,
 	    printf("This subroutine cannot support AR_VIDEO_MONO\n");
 	    printf("on O2 MVP Video Device\n");
 	    exit(1);
-        }     
+        }
     }
 
 
@@ -314,7 +314,7 @@ unsigned char *arVideoGetImage2( int dev_id )
 
     info = vlGetLatestValid(svr, video_att[dev_id].buffer);
     if( info == NULL ) return(NULL);
-    
+
     /* Get a pointer to the frame */
     dataPtr = vlGetActiveRegion(svr, video_att[dev_id].buffer, info);
 
@@ -414,8 +414,8 @@ static void activate_path( int dev_id )
     }
     if(vlSetControl(svr, video_att[dev_id].path,
                     video_att[dev_id].drn, VL_PACKING, &val) < 0) error_exit();
-    
-    
+
+
     /* Get the video size */
     if( vlGetControl(svr, video_att[dev_id].path,
                      video_att[dev_id].drn, VL_SIZE, &val) < 0 ) error_exit();
@@ -426,7 +426,7 @@ static void activate_path( int dev_id )
     video_att[dev_id].buffer = vlCreateBuffer(svr, video_att[dev_id].path,
                                                    video_att[dev_id].drn,
                                                    video_att[dev_id].buffer_size);
-    if(video_att[dev_id].buffer == NULL) error_exit();	
+    if(video_att[dev_id].buffer == NULL) error_exit();
     vlRegisterBuffer(svr, video_att[dev_id].path,
                           video_att[dev_id].drn,
                           video_att[dev_id].buffer);
@@ -456,3 +456,4 @@ static void deactivate_path( int dev_id )
 
     free( video_att[dev_id].t_buf );
 }
+

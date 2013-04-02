@@ -1,0 +1,60 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/glfw-2.7.6/tests/accuracy.c \
+../lib/glfw-2.7.6/tests/defaults.c \
+../lib/glfw-2.7.6/tests/dynamic.c \
+../lib/glfw-2.7.6/tests/events.c \
+../lib/glfw-2.7.6/tests/fsaa.c \
+../lib/glfw-2.7.6/tests/fsinput.c \
+../lib/glfw-2.7.6/tests/getopt.c \
+../lib/glfw-2.7.6/tests/iconify.c \
+../lib/glfw-2.7.6/tests/joysticks.c \
+../lib/glfw-2.7.6/tests/peter.c \
+../lib/glfw-2.7.6/tests/reopen.c \
+../lib/glfw-2.7.6/tests/tearing.c \
+../lib/glfw-2.7.6/tests/version.c 
+
+OBJS += \
+./lib/glfw-2.7.6/tests/accuracy.o \
+./lib/glfw-2.7.6/tests/defaults.o \
+./lib/glfw-2.7.6/tests/dynamic.o \
+./lib/glfw-2.7.6/tests/events.o \
+./lib/glfw-2.7.6/tests/fsaa.o \
+./lib/glfw-2.7.6/tests/fsinput.o \
+./lib/glfw-2.7.6/tests/getopt.o \
+./lib/glfw-2.7.6/tests/iconify.o \
+./lib/glfw-2.7.6/tests/joysticks.o \
+./lib/glfw-2.7.6/tests/peter.o \
+./lib/glfw-2.7.6/tests/reopen.o \
+./lib/glfw-2.7.6/tests/tearing.o \
+./lib/glfw-2.7.6/tests/version.o 
+
+C_DEPS += \
+./lib/glfw-2.7.6/tests/accuracy.d \
+./lib/glfw-2.7.6/tests/defaults.d \
+./lib/glfw-2.7.6/tests/dynamic.d \
+./lib/glfw-2.7.6/tests/events.d \
+./lib/glfw-2.7.6/tests/fsaa.d \
+./lib/glfw-2.7.6/tests/fsinput.d \
+./lib/glfw-2.7.6/tests/getopt.d \
+./lib/glfw-2.7.6/tests/iconify.d \
+./lib/glfw-2.7.6/tests/joysticks.d \
+./lib/glfw-2.7.6/tests/peter.d \
+./lib/glfw-2.7.6/tests/reopen.d \
+./lib/glfw-2.7.6/tests/tearing.d \
+./lib/glfw-2.7.6/tests/version.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/glfw-2.7.6/tests/%.o: ../lib/glfw-2.7.6/tests/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -I"../../Project C++/lib/AntTweakBar-1.15/include" -I"../../Project C++/lib/glew-1.9.0/include" -I"../../Project C++/lib/glfw-2.7.6/include" -I"../../Project C++/lib/glfw-2.7.6/lib" -I"../../Project C++/lib/glfw-2.7.6/lib/x11" -I"../../Project C++/lib/glm-0.9.4.0" -I/usr/include/GL -I/usr/include/glib-2.0 -I"../../Project C++/lib/ARToolKit/include" -I/usr/include/gstreamer-0.10 -I/usr/include/libxml2 -I/usr/lib/i386-linux-gnu/glib-2.0/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

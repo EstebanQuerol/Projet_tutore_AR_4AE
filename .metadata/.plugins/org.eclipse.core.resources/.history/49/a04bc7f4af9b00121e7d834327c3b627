@@ -1,0 +1,45 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/glfw-2.7.6/lib/carbon/carbon_enable.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_fullscreen.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_glext.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_init.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_joystick.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_thread.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_time.c \
+../lib/glfw-2.7.6/lib/carbon/carbon_window.c 
+
+OBJS += \
+./lib/glfw-2.7.6/lib/carbon/carbon_enable.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_fullscreen.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_glext.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_init.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_joystick.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_thread.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_time.o \
+./lib/glfw-2.7.6/lib/carbon/carbon_window.o 
+
+C_DEPS += \
+./lib/glfw-2.7.6/lib/carbon/carbon_enable.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_fullscreen.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_glext.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_init.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_joystick.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_thread.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_time.d \
+./lib/glfw-2.7.6/lib/carbon/carbon_window.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/glfw-2.7.6/lib/carbon/%.o: ../lib/glfw-2.7.6/lib/carbon/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -I"../../Project C++/lib/AntTweakBar-1.15/include" -I"../../Project C++/lib/glew-1.9.0/include" -I"../../Project C++/lib/glfw-2.7.6/include" -I"../../Project C++/lib/glfw-2.7.6/lib" -I"../../Project C++/lib/glfw-2.7.6/lib/x11" -I"../../Project C++/lib/glm-0.9.4.0" -I/usr/include/GL -I/usr/include/glib-2.0 -I"../../Project C++/lib/ARToolKit/include" -I/usr/include/gstreamer-0.10 -I/usr/include/libxml2 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I"../../Project C++/Include" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

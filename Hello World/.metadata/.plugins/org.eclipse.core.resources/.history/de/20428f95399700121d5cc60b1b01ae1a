@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/external/ARToolKit/lib/SRC/VideoSGI/video.c \
+../lib/external/ARToolKit/lib/SRC/VideoSGI/video2.c 
+
+OBJS += \
+./lib/external/ARToolKit/lib/SRC/VideoSGI/video.o \
+./lib/external/ARToolKit/lib/SRC/VideoSGI/video2.o 
+
+C_DEPS += \
+./lib/external/ARToolKit/lib/SRC/VideoSGI/video.d \
+./lib/external/ARToolKit/lib/SRC/VideoSGI/video2.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/ARToolKit/lib/SRC/VideoSGI/%.o: ../lib/external/ARToolKit/lib/SRC/VideoSGI/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

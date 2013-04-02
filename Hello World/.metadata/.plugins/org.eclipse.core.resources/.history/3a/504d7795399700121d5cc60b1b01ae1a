@@ -1,0 +1,60 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_bit.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_gradient_paint.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_integer.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_matrix_query.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_quaternion.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_random.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_rotate_vector.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_simd_mat4.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_simd_vec4.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_string_cast.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_vector_angle.cpp \
+../lib/external/glm-0.9.4.0/test/gtx/gtx_vector_query.cpp 
+
+OBJS += \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_bit.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_gradient_paint.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_integer.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_matrix_query.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_quaternion.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_random.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_rotate_vector.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_simd_mat4.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_simd_vec4.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_string_cast.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_vector_angle.o \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_vector_query.o 
+
+CPP_DEPS += \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_bit.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_gradient_paint.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_integer.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_matrix_query.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_quaternion.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_random.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_rotate_vector.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_simd_mat4.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_simd_vec4.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_string_cast.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_vector_angle.d \
+./lib/external/glm-0.9.4.0/test/gtx/gtx_vector_query.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/glm-0.9.4.0/test/gtx/%.o: ../lib/external/glm-0.9.4.0/test/gtx/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C++ Compiler'
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

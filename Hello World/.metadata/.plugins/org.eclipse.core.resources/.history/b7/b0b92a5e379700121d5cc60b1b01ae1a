@@ -1,0 +1,108 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../lib/external/glm-0.9.4.0/test/core/core_func_common.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_exponential.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_geometric.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_integer.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_matrix.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_noise.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_packing.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_swizzle.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_trigonometric.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_func_vector_relational.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_setup_message.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_setup_precision.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_float.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_half.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_int.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_length.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat2x2.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat2x3.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat2x4.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat3x2.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat3x3.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat3x4.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat4x2.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat4x3.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_mat4x4.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_vec1.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_vec2.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_vec3.cpp \
+../lib/external/glm-0.9.4.0/test/core/core_type_vec4.cpp 
+
+OBJS += \
+./lib/external/glm-0.9.4.0/test/core/core_func_common.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_exponential.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_geometric.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_integer.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_matrix.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_noise.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_packing.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_swizzle.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_trigonometric.o \
+./lib/external/glm-0.9.4.0/test/core/core_func_vector_relational.o \
+./lib/external/glm-0.9.4.0/test/core/core_setup_message.o \
+./lib/external/glm-0.9.4.0/test/core/core_setup_precision.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_float.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_half.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_int.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_length.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat2x2.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat2x3.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat2x4.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat3x2.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat3x3.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat3x4.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat4x2.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat4x3.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat4x4.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec1.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec2.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec3.o \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec4.o 
+
+CPP_DEPS += \
+./lib/external/glm-0.9.4.0/test/core/core_func_common.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_exponential.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_geometric.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_integer.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_matrix.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_noise.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_packing.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_swizzle.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_trigonometric.d \
+./lib/external/glm-0.9.4.0/test/core/core_func_vector_relational.d \
+./lib/external/glm-0.9.4.0/test/core/core_setup_message.d \
+./lib/external/glm-0.9.4.0/test/core/core_setup_precision.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_float.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_half.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_int.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_length.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat2x2.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat2x3.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat2x4.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat3x2.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat3x3.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat3x4.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat4x2.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat4x3.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_mat4x4.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec1.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec2.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec3.d \
+./lib/external/glm-0.9.4.0/test/core/core_type_vec4.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/glm-0.9.4.0/test/core/%.o: ../lib/external/glm-0.9.4.0/test/core/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C++ Compiler'
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

@@ -1,0 +1,135 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/external/ARToolKit/lib/SRC/AR/arDetectMarker.c \
+../lib/external/ARToolKit/lib/SRC/AR/arDetectMarker2.c \
+../lib/external/ARToolKit/lib/SRC/AR/arGetCode.c \
+../lib/external/ARToolKit/lib/SRC/AR/arGetMarkerInfo.c \
+../lib/external/ARToolKit/lib/SRC/AR/arGetTransMat.c \
+../lib/external/ARToolKit/lib/SRC/AR/arGetTransMat2.c \
+../lib/external/ARToolKit/lib/SRC/AR/arGetTransMat3.c \
+../lib/external/ARToolKit/lib/SRC/AR/arGetTransMatCont.c \
+../lib/external/ARToolKit/lib/SRC/AR/arLabeling.c \
+../lib/external/ARToolKit/lib/SRC/AR/arUtil.c \
+../lib/external/ARToolKit/lib/SRC/AR/mAlloc.c \
+../lib/external/ARToolKit/lib/SRC/AR/mAllocDup.c \
+../lib/external/ARToolKit/lib/SRC/AR/mAllocInv.c \
+../lib/external/ARToolKit/lib/SRC/AR/mAllocMul.c \
+../lib/external/ARToolKit/lib/SRC/AR/mAllocTrans.c \
+../lib/external/ARToolKit/lib/SRC/AR/mAllocUnit.c \
+../lib/external/ARToolKit/lib/SRC/AR/mDet.c \
+../lib/external/ARToolKit/lib/SRC/AR/mDisp.c \
+../lib/external/ARToolKit/lib/SRC/AR/mDup.c \
+../lib/external/ARToolKit/lib/SRC/AR/mFree.c \
+../lib/external/ARToolKit/lib/SRC/AR/mInv.c \
+../lib/external/ARToolKit/lib/SRC/AR/mMul.c \
+../lib/external/ARToolKit/lib/SRC/AR/mPCA.c \
+../lib/external/ARToolKit/lib/SRC/AR/mSelfInv.c \
+../lib/external/ARToolKit/lib/SRC/AR/mTrans.c \
+../lib/external/ARToolKit/lib/SRC/AR/mUnit.c \
+../lib/external/ARToolKit/lib/SRC/AR/paramChangeSize.c \
+../lib/external/ARToolKit/lib/SRC/AR/paramDecomp.c \
+../lib/external/ARToolKit/lib/SRC/AR/paramDisp.c \
+../lib/external/ARToolKit/lib/SRC/AR/paramDistortion.c \
+../lib/external/ARToolKit/lib/SRC/AR/paramFile.c \
+../lib/external/ARToolKit/lib/SRC/AR/paramGet.c \
+../lib/external/ARToolKit/lib/SRC/AR/vAlloc.c \
+../lib/external/ARToolKit/lib/SRC/AR/vDisp.c \
+../lib/external/ARToolKit/lib/SRC/AR/vFree.c \
+../lib/external/ARToolKit/lib/SRC/AR/vHouse.c \
+../lib/external/ARToolKit/lib/SRC/AR/vInnerP.c \
+../lib/external/ARToolKit/lib/SRC/AR/vTridiag.c 
+
+OBJS += \
+./lib/external/ARToolKit/lib/SRC/AR/arDetectMarker.o \
+./lib/external/ARToolKit/lib/SRC/AR/arDetectMarker2.o \
+./lib/external/ARToolKit/lib/SRC/AR/arGetCode.o \
+./lib/external/ARToolKit/lib/SRC/AR/arGetMarkerInfo.o \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMat.o \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMat2.o \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMat3.o \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMatCont.o \
+./lib/external/ARToolKit/lib/SRC/AR/arLabeling.o \
+./lib/external/ARToolKit/lib/SRC/AR/arUtil.o \
+./lib/external/ARToolKit/lib/SRC/AR/mAlloc.o \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocDup.o \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocInv.o \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocMul.o \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocTrans.o \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocUnit.o \
+./lib/external/ARToolKit/lib/SRC/AR/mDet.o \
+./lib/external/ARToolKit/lib/SRC/AR/mDisp.o \
+./lib/external/ARToolKit/lib/SRC/AR/mDup.o \
+./lib/external/ARToolKit/lib/SRC/AR/mFree.o \
+./lib/external/ARToolKit/lib/SRC/AR/mInv.o \
+./lib/external/ARToolKit/lib/SRC/AR/mMul.o \
+./lib/external/ARToolKit/lib/SRC/AR/mPCA.o \
+./lib/external/ARToolKit/lib/SRC/AR/mSelfInv.o \
+./lib/external/ARToolKit/lib/SRC/AR/mTrans.o \
+./lib/external/ARToolKit/lib/SRC/AR/mUnit.o \
+./lib/external/ARToolKit/lib/SRC/AR/paramChangeSize.o \
+./lib/external/ARToolKit/lib/SRC/AR/paramDecomp.o \
+./lib/external/ARToolKit/lib/SRC/AR/paramDisp.o \
+./lib/external/ARToolKit/lib/SRC/AR/paramDistortion.o \
+./lib/external/ARToolKit/lib/SRC/AR/paramFile.o \
+./lib/external/ARToolKit/lib/SRC/AR/paramGet.o \
+./lib/external/ARToolKit/lib/SRC/AR/vAlloc.o \
+./lib/external/ARToolKit/lib/SRC/AR/vDisp.o \
+./lib/external/ARToolKit/lib/SRC/AR/vFree.o \
+./lib/external/ARToolKit/lib/SRC/AR/vHouse.o \
+./lib/external/ARToolKit/lib/SRC/AR/vInnerP.o \
+./lib/external/ARToolKit/lib/SRC/AR/vTridiag.o 
+
+C_DEPS += \
+./lib/external/ARToolKit/lib/SRC/AR/arDetectMarker.d \
+./lib/external/ARToolKit/lib/SRC/AR/arDetectMarker2.d \
+./lib/external/ARToolKit/lib/SRC/AR/arGetCode.d \
+./lib/external/ARToolKit/lib/SRC/AR/arGetMarkerInfo.d \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMat.d \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMat2.d \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMat3.d \
+./lib/external/ARToolKit/lib/SRC/AR/arGetTransMatCont.d \
+./lib/external/ARToolKit/lib/SRC/AR/arLabeling.d \
+./lib/external/ARToolKit/lib/SRC/AR/arUtil.d \
+./lib/external/ARToolKit/lib/SRC/AR/mAlloc.d \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocDup.d \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocInv.d \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocMul.d \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocTrans.d \
+./lib/external/ARToolKit/lib/SRC/AR/mAllocUnit.d \
+./lib/external/ARToolKit/lib/SRC/AR/mDet.d \
+./lib/external/ARToolKit/lib/SRC/AR/mDisp.d \
+./lib/external/ARToolKit/lib/SRC/AR/mDup.d \
+./lib/external/ARToolKit/lib/SRC/AR/mFree.d \
+./lib/external/ARToolKit/lib/SRC/AR/mInv.d \
+./lib/external/ARToolKit/lib/SRC/AR/mMul.d \
+./lib/external/ARToolKit/lib/SRC/AR/mPCA.d \
+./lib/external/ARToolKit/lib/SRC/AR/mSelfInv.d \
+./lib/external/ARToolKit/lib/SRC/AR/mTrans.d \
+./lib/external/ARToolKit/lib/SRC/AR/mUnit.d \
+./lib/external/ARToolKit/lib/SRC/AR/paramChangeSize.d \
+./lib/external/ARToolKit/lib/SRC/AR/paramDecomp.d \
+./lib/external/ARToolKit/lib/SRC/AR/paramDisp.d \
+./lib/external/ARToolKit/lib/SRC/AR/paramDistortion.d \
+./lib/external/ARToolKit/lib/SRC/AR/paramFile.d \
+./lib/external/ARToolKit/lib/SRC/AR/paramGet.d \
+./lib/external/ARToolKit/lib/SRC/AR/vAlloc.d \
+./lib/external/ARToolKit/lib/SRC/AR/vDisp.d \
+./lib/external/ARToolKit/lib/SRC/AR/vFree.d \
+./lib/external/ARToolKit/lib/SRC/AR/vHouse.d \
+./lib/external/ARToolKit/lib/SRC/AR/vInnerP.d \
+./lib/external/ARToolKit/lib/SRC/AR/vTridiag.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/ARToolKit/lib/SRC/AR/%.o: ../lib/external/ARToolKit/lib/SRC/AR/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

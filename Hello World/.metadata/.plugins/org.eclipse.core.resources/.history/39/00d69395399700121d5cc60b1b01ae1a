@@ -1,0 +1,30 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/external/ARToolKit/lib/SRC/ARMulti/arMultiActivate.c \
+../lib/external/ARToolKit/lib/SRC/ARMulti/arMultiGetTransMat.c \
+../lib/external/ARToolKit/lib/SRC/ARMulti/arMultiReadConfigFile.c 
+
+OBJS += \
+./lib/external/ARToolKit/lib/SRC/ARMulti/arMultiActivate.o \
+./lib/external/ARToolKit/lib/SRC/ARMulti/arMultiGetTransMat.o \
+./lib/external/ARToolKit/lib/SRC/ARMulti/arMultiReadConfigFile.o 
+
+C_DEPS += \
+./lib/external/ARToolKit/lib/SRC/ARMulti/arMultiActivate.d \
+./lib/external/ARToolKit/lib/SRC/ARMulti/arMultiGetTransMat.d \
+./lib/external/ARToolKit/lib/SRC/ARMulti/arMultiReadConfigFile.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/ARToolKit/lib/SRC/ARMulti/%.o: ../lib/external/ARToolKit/lib/SRC/ARMulti/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/external/ARToolKit/examples/simpleVRML/object.c \
+../lib/external/ARToolKit/examples/simpleVRML/simpleVRML.c 
+
+OBJS += \
+./lib/external/ARToolKit/examples/simpleVRML/object.o \
+./lib/external/ARToolKit/examples/simpleVRML/simpleVRML.o 
+
+C_DEPS += \
+./lib/external/ARToolKit/examples/simpleVRML/object.d \
+./lib/external/ARToolKit/examples/simpleVRML/simpleVRML.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/ARToolKit/examples/simpleVRML/%.o: ../lib/external/ARToolKit/examples/simpleVRML/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

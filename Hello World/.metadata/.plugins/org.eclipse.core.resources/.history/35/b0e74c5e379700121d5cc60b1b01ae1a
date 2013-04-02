@@ -1,0 +1,30 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../lib/external/ARToolKit/lib/SRC/Gl/gsub.c \
+../lib/external/ARToolKit/lib/SRC/Gl/gsubUtil.c \
+../lib/external/ARToolKit/lib/SRC/Gl/gsub_lite.c 
+
+OBJS += \
+./lib/external/ARToolKit/lib/SRC/Gl/gsub.o \
+./lib/external/ARToolKit/lib/SRC/Gl/gsubUtil.o \
+./lib/external/ARToolKit/lib/SRC/Gl/gsub_lite.o 
+
+C_DEPS += \
+./lib/external/ARToolKit/lib/SRC/Gl/gsub.d \
+./lib/external/ARToolKit/lib/SRC/Gl/gsubUtil.d \
+./lib/external/ARToolKit/lib/SRC/Gl/gsub_lite.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/ARToolKit/lib/SRC/Gl/%.o: ../lib/external/ARToolKit/lib/SRC/Gl/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C Compiler'
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

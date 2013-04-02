@@ -862,6 +862,14 @@
 </instance>
 <instance id="cdt.managedbuild.config.gnu.exe.debug.1736377521;cdt.managedbuild.config.gnu.exe.debug.1736377521.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.797477834;cdt.managedbuild.tool.gnu.cpp.compiler.input.1809110217">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<includePath path="/usr/include/c++/4.6"/>
+<includePath path="/usr/include/c++/4.6/i686-linux-gnu/."/>
+<includePath path="/usr/include/c++/4.6/backward"/>
+<includePath path="/usr/lib/gcc/i686-linux-gnu/4.6.1/include"/>
+<includePath path="/usr/local/include"/>
+<includePath path="/usr/lib/gcc/i686-linux-gnu/4.6.1/include-fixed"/>
+<includePath path="/usr/include/i386-linux-gnu"/>
+<includePath path="/usr/include"/>
 <definedSymbol symbol="__STDC__=1"/>
 <definedSymbol symbol="__cplusplus=1"/>
 <definedSymbol symbol="__STDC_HOSTED__=1"/>
@@ -1080,6 +1088,11 @@
 </instance>
 <instance id="cdt.managedbuild.config.gnu.exe.debug.1736377521;cdt.managedbuild.config.gnu.exe.debug.1736377521.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.319020047;cdt.managedbuild.tool.gnu.c.compiler.input.2045277544">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<includePath path="/usr/lib/gcc/i686-linux-gnu/4.6.1/include"/>
+<includePath path="/usr/local/include"/>
+<includePath path="/usr/lib/gcc/i686-linux-gnu/4.6.1/include-fixed"/>
+<includePath path="/usr/include/i386-linux-gnu"/>
+<includePath path="/usr/include"/>
 <definedSymbol symbol="__STDC__=1"/>
 <definedSymbol symbol="__STDC_HOSTED__=1"/>
 <definedSymbol symbol="__GNUC__=4"/>

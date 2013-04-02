@@ -1,0 +1,66 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_constants.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_epsilon.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_half_float.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_access.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_integer.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_inverse.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_transform.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_noise.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_quaternion.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_random.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_reciprocal.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_swizzle.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_type_precision.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_type_ptr.cpp \
+../lib/external/glm-0.9.4.0/test/gtc/gtc_ulp.cpp 
+
+OBJS += \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_constants.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_epsilon.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_half_float.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_access.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_integer.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_inverse.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_transform.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_noise.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_quaternion.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_random.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_reciprocal.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_swizzle.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_type_precision.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_type_ptr.o \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_ulp.o 
+
+CPP_DEPS += \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_constants.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_epsilon.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_half_float.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_access.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_integer.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_inverse.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_matrix_transform.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_noise.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_quaternion.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_random.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_reciprocal.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_swizzle.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_type_precision.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_type_ptr.d \
+./lib/external/glm-0.9.4.0/test/gtc/gtc_ulp.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+lib/external/glm-0.9.4.0/test/gtc/%.o: ../lib/external/glm-0.9.4.0/test/gtc/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C++ Compiler'
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

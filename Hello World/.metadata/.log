@@ -2116,3 +2116,49 @@ java.io.IOException: read error
 	at org.eclipse.debug.internal.core.OutputStreamMonitor.access$1(OutputStreamMonitor.java:134)
 	at org.eclipse.debug.internal.core.OutputStreamMonitor$1.run(OutputStreamMonitor.java:207)
 	at java.lang.Thread.run(Thread.java:679)
+
+!ENTRY org.eclipse.debug.core 4 125 2013-04-02 16:12:09.220
+!MESSAGE Error logged from Debug Core: 
+!STACK 0
+java.io.IOException: read error
+	at org.eclipse.cdt.utils.spawner.SpawnerInputStream.read0(Native Method)
+	at org.eclipse.cdt.utils.spawner.SpawnerInputStream.read(SpawnerInputStream.java:66)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:273)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:334)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.debug.internal.core.OutputStreamMonitor.read(OutputStreamMonitor.java:144)
+	at org.eclipse.debug.internal.core.OutputStreamMonitor.access$1(OutputStreamMonitor.java:134)
+	at org.eclipse.debug.internal.core.OutputStreamMonitor$1.run(OutputStreamMonitor.java:207)
+	at java.lang.Thread.run(Thread.java:679)
+
+!ENTRY org.eclipse.egit.core 4 0 2013-04-02 16:25:30.635
+!MESSAGE An exception occurred during push on URI https://github.com/Narik/Projet_tutore_AR_4AE.git: https://github.com/Narik/Projet_tutore_AR_4AE.git: Read timed out
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: https://github.com/Narik/Projet_tutore_AR_4AE.git: Read timed out
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:157)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:215)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI.execute(PushOperationUI.java:147)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI$1.run(PushOperationUI.java:209)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/Narik/Projet_tutore_AR_4AE.git: Read timed out
+	at org.eclipse.jgit.transport.BasePackPushConnection.doPush(BasePackPushConnection.java:204)
+	at org.eclipse.jgit.transport.TransportHttp$SmartHttpPushConnection.doPush(TransportHttp.java:771)
+	at org.eclipse.jgit.transport.BasePackPushConnection.push(BasePackPushConnection.java:142)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:141)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1162)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:153)
+	... 4 more
+Caused by: java.io.InterruptedIOException: Read timed out
+	at org.eclipse.jgit.util.io.TimeoutInputStream.readTimedOut(TimeoutInputStream.java:141)
+	at org.eclipse.jgit.util.io.TimeoutInputStream.read(TimeoutInputStream.java:114)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:246)
+	at org.eclipse.jgit.transport.PacketLineIn.readLength(PacketLineIn.java:186)
+	at org.eclipse.jgit.transport.SideBandInputStream.needDataPacket(SideBandInputStream.java:154)
+	at org.eclipse.jgit.transport.SideBandInputStream.read(SideBandInputStream.java:136)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:246)
+	at org.eclipse.jgit.transport.PacketLineIn.readLength(PacketLineIn.java:186)
+	at org.eclipse.jgit.transport.PacketLineIn.readString(PacketLineIn.java:138)
+	at org.eclipse.jgit.transport.BasePackPushConnection.readStringLongTimeout(BasePackPushConnection.java:352)
+	at org.eclipse.jgit.transport.BasePackPushConnection.readStatusReport(BasePackPushConnection.java:293)
+	at org.eclipse.jgit.transport.BasePackPushConnection.doPush(BasePackPushConnection.java:187)
+	... 9 more

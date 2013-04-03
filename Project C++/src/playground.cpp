@@ -2,15 +2,14 @@
  * playground.cpp
  *
  *  Created on: 23/03/2013
- *      Author: narik
+ *      Author: The augmented reality team
  */
 
-
+//System includes
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-//Includes local
 
 //OpenGL includes
 #include <GL/glew.h>
@@ -123,7 +122,7 @@ static int setupMarker(const char *patt_name, int *patt_id)
 static void draw(void){
 
 
-		// Draw the triangle !
+		// Draw triangles !
 		glDrawArrays(GL_TRIANGLES, 0, 2*3); // Starting from vertex 0; 3 vertices total -> 1 triangle
 
 		glDisableVertexAttribArray(0);
@@ -142,6 +141,14 @@ static void Quit(void)
 	arglCleanup(gArglSettings);
 	arVideoCapStop();
 	arVideoClose();
+	// Cleanup VBO
+	//glDeleteBuffers(1, &vertexbuffer);
+	//glDeleteBuffers(1, &colorbuffer);
+	//glDeleteBuffers(1, &uvbuffer);
+	//glDeleteProgram(programID);
+	//glDeleteVertexArrays(1, &VertexArrayID);
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
 	exit(0);
 }
 
@@ -282,15 +289,9 @@ static void Display(void)
 			//return -1;
 		}*/
 
-		// Initialize GLEW
-		glewExperimental = true; // Needed for core profile
-		if (glewInit() != GLEW_OK) {
-			fprintf(stderr, "Failed to initialize GLEW\n");
-			//return -1;
-		}
-	/*
-		glfwSetWindowTitle( "Playground" );
-	*/
+
+
+
 		// Ensure we can capture the escape key being pressed below
 		glfwEnable( GLFW_STICKY_KEYS );
 
@@ -397,64 +398,58 @@ static void Display(void)
 		glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
 
-		do{
-		    // Draw nothing, see you in tutorial 2 !
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-			// Use our shader
-			glUseProgram(programID);
+		// Draw nothing, see you in tutorial 2 !
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-			// Send our transformation to the currently bound shader,
-			// in the "MVP" uniform
-			// For each model you render, since the MVP will be different (at least the M part)
-			glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+		// Use our shader
+		glUseProgram(programID);
 
-			// Bind our texture in Texture Unit 0
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, Texture);
-			// Set our "myTextureSampler" sampler to user Texture Unit 0
-			glUniform1i(TextureID, 0);
+		// Send our transformation to the currently bound shader,
+		// in the "MVP" uniform
+		// For each model you render, since the MVP will be different (at least the M part)
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
-			// 1rst attribute buffer : vertices
-			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-			glVertexAttribPointer(
-			   0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			   3,                  // size
-			   GL_FLOAT,           // type
-			   GL_FALSE,           // normalized?
-			   0,                  // stride
-			   (void*)0            // array buffer offset
-			);
+		// Bind our texture in Texture Unit 0
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, Texture);
+		// Set our "myTextureSampler" sampler to user Texture Unit 0
+		glUniform1i(TextureID, 0);
 
-			 // 2nd attribute buffer : UVs
-			glEnableVertexAttribArray(1);
-			glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-			glVertexAttribPointer(
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glVertexAttribPointer(
+				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+				3,                  // size
+				GL_FLOAT,           // type
+				GL_FALSE,           // normalized?
+				0,                  // stride
+				(void*)0            // array buffer offset
+		);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+		glVertexAttribPointer(
 				1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
 				2,                                // size : U+V => 2
 				GL_FLOAT,                         // type
 				GL_FALSE,                         // normalized?
 				0,                                // stride
 				(void*)0                          // array buffer offset
-			);
+		);
 
 
 		// All lighting and geometry to be drawn relative to the marker goes here.
 
 		draw();
-		}
-		// Check if the ESC key was pressed or the window was closed
-		while( glfwGetKey( GLFW_KEY_ESC ) != GLFW_PRESS &&
-		glfwGetWindowParam( GLFW_OPENED ) );
-		// Cleanup VBO
+
 		glDeleteBuffers(1, &vertexbuffer);
 		//glDeleteBuffers(1, &colorbuffer);
 		glDeleteBuffers(1, &uvbuffer);
 		glDeleteProgram(programID);
 		glDeleteVertexArrays(1, &VertexArrayID);
-
-
 
 	} // gPatt_found
 
@@ -468,8 +463,15 @@ static void Display(void)
 
 
 
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
+
+}
+
+void keycheck(unsigned char in_key,int mouse_x,int mouse_y){
+
+	// Check if the ESC key was pressed or the window was closed
+	if(in_key==27){
+		Quit();
+	}
 }
 
 int main (int argc, char** argv){
@@ -511,6 +513,7 @@ int main (int argc, char** argv){
 		glutInitWindowSize(prefWidth, prefHeight);
 		glutCreateWindow(argv[0]);
 	}
+	glfwSetWindowTitle( "Playground" );
 
 	// Setup argl library for current context.
 	if ((gArglSettings = arglSetupForCurrentContext()) == NULL) {
@@ -530,9 +533,11 @@ int main (int argc, char** argv){
 
 
 
+
 	glutDisplayFunc(Display);
 	glutReshapeFunc(Reshape);
 	glutVisibilityFunc(Visibility);
+	glutKeyboardFunc(keycheck);
 	glutMainLoop();
 
 

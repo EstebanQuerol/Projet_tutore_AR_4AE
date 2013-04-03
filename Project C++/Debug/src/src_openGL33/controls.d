@@ -1,5 +1,5 @@
-lib/glm-0.9.4.0/test/gtx/gtx_bit.d: \
- ../lib/glm-0.9.4.0/test/gtx/gtx_bit.cpp \
+src/src_openGL33/controls.d: ../src/src_openGL33/controls.cpp \
+ ../../Project\ C++/lib/glfw-2.7.6/include/GL/glfw.h \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/_fixes.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/setup.hpp \
@@ -64,22 +64,13 @@ lib/glm-0.9.4.0/test/gtx/gtx_bit.d: \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.inl \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/type_precision.hpp \
+ ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../glm.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../gtc/half_float.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/type_precision.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/bit.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtc/half_float.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/bit.inl
+ ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.inl \
+ ../../Project\ C++/Include/controls.hpp
+
+../../Project\ C++/lib/glfw-2.7.6/include/GL/glfw.h:
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp:
 
@@ -209,34 +200,12 @@ lib/glm-0.9.4.0/test/gtx/gtx_bit.d: \
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/type_precision.hpp:
+../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.hpp:
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../glm.hpp:
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../core/_fixes.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.hpp:
+../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.inl:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../gtc/half_float.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/type_precision.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/bit.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtc/half_float.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/bit.inl:
+../../Project\ C++/Include/controls.hpp:

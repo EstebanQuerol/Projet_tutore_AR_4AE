@@ -1,5 +1,4 @@
-lib/glm-0.9.4.0/test/gtx/gtx_quaternion.d: \
- ../lib/glm-0.9.4.0/test/gtx/gtx_quaternion.cpp \
+src/src_openGL33/vboindexer.d: ../src/src_openGL33/vboindexer.cpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/_fixes.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/setup.hpp \
@@ -64,22 +63,7 @@ lib/glm-0.9.4.0/test/gtx/gtx_quaternion.d: \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.inl \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/epsilon.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../gtc/half_float.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/epsilon.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/quaternion.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtc/quaternion.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/quaternion.inl
+ ../../Project\ C++/Include/vboindexer.hpp
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp:
 
@@ -209,34 +193,4 @@ lib/glm-0.9.4.0/test/gtx/gtx_quaternion.d: \
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/epsilon.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/half_float.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/../gtc/half_float.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../gtc/quaternion.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/epsilon.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/quaternion.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtc/quaternion.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/quaternion.inl:
+../../Project\ C++/Include/vboindexer.hpp:

@@ -9,59 +9,8 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir.mk
+-include src/src_openGL33/subdir.mk
 -include src/subdir.mk
--include lib/glm-0.9.4.0/test/gtx/subdir.mk
--include lib/glm-0.9.4.0/test/gtc/subdir.mk
--include lib/glm-0.9.4.0/test/external/gli/core/subdir.mk
--include lib/glm-0.9.4.0/test/core/subdir.mk
--include lib/glm-0.9.4.0/glm/core/subdir.mk
--include lib/glfw-2.7.6/tests/subdir.mk
--include lib/glfw-2.7.6/lib/x11/subdir.mk
--include lib/glfw-2.7.6/lib/subdir.mk
--include lib/glfw-2.7.6/lib/win32/subdir.mk
--include lib/glfw-2.7.6/lib/cocoa/subdir.mk
--include lib/glfw-2.7.6/lib/carbon/subdir.mk
--include lib/glfw-2.7.6/examples/subdir.mk
--include lib/glew-1.9.0/src/subdir.mk
--include lib/glew-1.9.0/auto/src/subdir.mk
--include lib/AntTweakBar-1.15/src/subdir.mk
--include lib/AntTweakBar-1.15/examples/subdir.mk
--include lib/ARToolKit/util/videoTest/subdir.mk
--include lib/ARToolKit/util/mk_patt/subdir.mk
--include lib/ARToolKit/util/graphicsTest/subdir.mk
--include lib/ARToolKit/util/calib_distortion/subdir.mk
--include lib/ARToolKit/util/calib_cparam/subdir.mk
--include lib/ARToolKit/util/calib_camera2/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoWin32DirectShow/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoWin32.DEPRECATED/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoSGI/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoMacOSX/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoLinuxV4L/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoLinuxDV/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoLinux1394Cam/subdir.mk
--include lib/ARToolKit/lib/SRC/VideoGStreamer/subdir.mk
--include lib/ARToolKit/lib/SRC/Gl/subdir.mk
--include lib/ARToolKit/lib/SRC/ARvrml/subdir.mk
--include lib/ARToolKit/lib/SRC/ARMulti/subdir.mk
--include lib/ARToolKit/lib/SRC/AR/subdir.mk
--include lib/ARToolKit/examples/twoView/subdir.mk
--include lib/ARToolKit/examples/simpleVRML/subdir.mk
--include lib/ARToolKit/examples/simpleLite/subdir.mk
--include lib/ARToolKit/examples/simple2/subdir.mk
--include lib/ARToolKit/examples/simple/subdir.mk
--include lib/ARToolKit/examples/relation/subdir.mk
--include lib/ARToolKit/examples/range/subdir.mk
--include lib/ARToolKit/examples/paddleInteraction/subdir.mk
--include lib/ARToolKit/examples/paddleDemo/subdir.mk
--include lib/ARToolKit/examples/paddle/subdir.mk
--include lib/ARToolKit/examples/optical/subdir.mk
--include lib/ARToolKit/examples/multi/subdir.mk
--include lib/ARToolKit/examples/modeTest/subdir.mk
--include lib/ARToolKit/examples/loadMultiple/subdir.mk
--include lib/ARToolKit/examples/exview/subdir.mk
--include lib/ARToolKit/examples/collide/subdir.mk
--include lib/ARToolKit/bin/Data/multi/subdir.mk
--include Include/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -96,7 +45,7 @@ all: ProjectC++
 ProjectC++: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L../Project C++/lib/glew-1.9.0 -L../Project C++/lib/glfw-2.7.6/lib/x11 -L../Project C++/lib/ARToolKit/lib -L/usr/X11R6/lib -L/usr/lib -o"ProjectC++" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"../Project C++/lib/glew-1.9.0" -L"../Project C++/lib/glfw-2.7.6/lib/x11" -L"../Project C++/lib/ARToolKit/lib" -L/usr/X11R6/lib -L/usr/lib -o"ProjectC++" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

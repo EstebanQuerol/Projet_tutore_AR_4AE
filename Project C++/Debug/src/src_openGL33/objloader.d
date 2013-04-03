@@ -1,5 +1,4 @@
-lib/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.d: \
- ../lib/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.cpp \
+src/src_openGL33/objloader.d: ../src/src_openGL33/objloader.cpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/_fixes.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/setup.hpp \
@@ -64,8 +63,7 @@ lib/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.d: \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.inl \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_interpolation.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_interpolation.inl
+ ../../Project\ C++/Include/objloader.hpp
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp:
 
@@ -195,6 +193,4 @@ lib/glm-0.9.4.0/test/gtx/gtx_matrix_interpolation.d: \
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_interpolation.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_interpolation.inl:
+../../Project\ C++/Include/objloader.hpp:

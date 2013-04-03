@@ -1,5 +1,4 @@
-lib/glm-0.9.4.0/test/gtx/gtx_gradient_paint.d: \
- ../lib/glm-0.9.4.0/test/gtx/gtx_gradient_paint.cpp \
+src/src_openGL33/tangentspace.d: ../src/src_openGL33/tangentspace.cpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/_fixes.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/setup.hpp \
@@ -64,14 +63,7 @@ lib/glm-0.9.4.0/test/gtx/gtx_gradient_paint.d: \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.inl \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/gradient_paint.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/optimum_pow.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/optimum_pow.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/gradient_paint.inl
+ ../../Project\ C++/Include/tangentspace.hpp
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp:
 
@@ -201,18 +193,4 @@ lib/glm-0.9.4.0/test/gtx/gtx_gradient_paint.d: \
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/gradient_paint.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/optimum_pow.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../glm.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../core/_fixes.hpp:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/optimum_pow.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/gradient_paint.inl:
+../../Project\ C++/Include/tangentspace.hpp:

@@ -1,5 +1,5 @@
-lib/glm-0.9.4.0/test/gtx/gtx_matrix_query.d: \
- ../lib/glm-0.9.4.0/test/gtx/gtx_matrix_query.cpp \
+src/src_openGL33/text2D.d: ../src/src_openGL33/text2D.cpp \
+ ../../Project\ C++/lib/glew-1.9.0/include/GL/glew.h \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/_fixes.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/core/setup.hpp \
@@ -64,14 +64,15 @@ lib/glm-0.9.4.0/test/gtx/gtx_matrix_query.d: \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/func_noise.inl \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_query.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/vector_query.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../glm.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../core/_fixes.hpp \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/vector_query.inl \
- ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_query.inl
+ ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.hpp \
+ ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../glm.hpp \
+ ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../core/_fixes.hpp \
+ ../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.inl \
+ ../../Project\ C++/Include/shader.hpp \
+ ../../Project\ C++/Include/texture.hpp \
+ ../../Project\ C++/Include/text2D.hpp
+
+../../Project\ C++/lib/glew-1.9.0/include/GL/glew.h:
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/glm.hpp:
 
@@ -201,18 +202,16 @@ lib/glm-0.9.4.0/test/gtx/gtx_matrix_query.d: \
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/./core/_swizzle.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_query.hpp:
+../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../glm.hpp:
+../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../glm.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp:
+../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/../core/_fixes.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/vector_query.hpp:
+../../Project\ C++/lib/glm-0.9.4.0/glm/gtc/matrix_transform.inl:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../glm.hpp:
+../../Project\ C++/Include/shader.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/../core/_fixes.hpp:
+../../Project\ C++/Include/texture.hpp:
 
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtx/vector_query.inl:
-
-../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/matrix_query.inl:
+../../Project\ C++/Include/text2D.hpp:

@@ -5,15 +5,33 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/src_openGL33/controls.cpp \
-../src/src_openGL33/objloader.cpp 
+../src/src_openGL33/objloader.cpp \
+../src/src_openGL33/quaternion_utils.cpp \
+../src/src_openGL33/shader.cpp \
+../src/src_openGL33/tangentspace.cpp \
+../src/src_openGL33/text2D.cpp \
+../src/src_openGL33/texture.cpp \
+../src/src_openGL33/vboindexer.cpp 
 
 OBJS += \
 ./src/src_openGL33/controls.o \
-./src/src_openGL33/objloader.o 
+./src/src_openGL33/objloader.o \
+./src/src_openGL33/quaternion_utils.o \
+./src/src_openGL33/shader.o \
+./src/src_openGL33/tangentspace.o \
+./src/src_openGL33/text2D.o \
+./src/src_openGL33/texture.o \
+./src/src_openGL33/vboindexer.o 
 
 CPP_DEPS += \
 ./src/src_openGL33/controls.d \
-./src/src_openGL33/objloader.d 
+./src/src_openGL33/objloader.d \
+./src/src_openGL33/quaternion_utils.d \
+./src/src_openGL33/shader.d \
+./src/src_openGL33/tangentspace.d \
+./src/src_openGL33/text2D.d \
+./src/src_openGL33/texture.d \
+./src/src_openGL33/vboindexer.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -352,7 +352,7 @@ static void Display(void)
 		/************************************/
 
 		// Load the texture using any two methods
-		GLuint Texture = loadBMP_custom("aperture-science.bmp");
+		GLuint Texture = loadBMP_custom("../Images/aperture-science.bmp");
 		//GLuint Texture = loadDDS("uvtemplate.DDS");
 		//GLuint Texture = loadTGA_glfw("uvtemplate.tga");
 
@@ -475,14 +475,14 @@ static void Display(void)
 int main (int argc, char** argv){
 
 	char glutGamemode[32];
-	const char * cparam_name="../lib/ARToolKit/bin/Data/camera_para.dat";
+	const char * cparam_name="../../lib/ARToolKit/bin/Data/camera_para.dat";
 
 #ifdef _WIN32
 		char *vconf="Data\\WDM_camera_flipV.xml";
 #else
 		char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
 #endif
-		const char *patt_name  = "../lib/ARToolKit/bin/Data/patt.hiro";
+		const char *patt_name  = "../../lib/ARToolKit/bin/Data/patt.hiro";
 // ----------------------------------------------------------------------------
 	// Library inits.
 	//

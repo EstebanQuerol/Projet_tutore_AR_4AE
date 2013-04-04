@@ -102,9 +102,9 @@
 									<listOptionValue builtIn="false" value="X11"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.804653768" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;../Project C++/lib/glew-1.9.0&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;../Project C++/lib/glfw-2.7.6/lib/x11&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;../Project C++/lib/ARToolKit/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../lib/glew-1.9.0&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../lib/glfw-2.7.6/lib/x11&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;../lib/ARToolKit/lib&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/X11R6/lib"/>
 									<listOptionValue builtIn="false" value="/usr/lib"/>
 								</option>

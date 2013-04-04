@@ -17,6 +17,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 using namespace glm;
+#include "SOIL.h"
 
 //AR includes
 #include <GL/glut.h>
@@ -67,9 +68,11 @@ static int			gARTThreshhold = 100;
 static long			gCallCountMarkerDetect = 0;
 
 // OpenGL3.3
+
+
 GLuint programID;
 GLuint MatrixID;
-GLuint Texture;
+unsigned int Texture;
 GLuint TextureID;
 GLuint VertexArrayID;
 glm::mat4 MVP;
@@ -145,11 +148,11 @@ static int createImage(void){
 		}*/
 
 	// Initialize GLEW
-			glewExperimental = true; // Needed for core profile
-			if (glewInit() != GLEW_OK) {
-				fprintf(stderr, "Failed to initialize GLEW\n");
-				//return -1;
-			}
+		glewExperimental = true; // Needed for core profile
+		if (glewInit() != GLEW_OK) {
+			fprintf(stderr, "Failed to initialize GLEW\n");
+			//return -1;
+		}
 	// Initialize GLFW
 		if( !glfwInit() )
 		{
@@ -174,7 +177,7 @@ static int createImage(void){
 		/***********************************************/
 
 		// Create and compile our GLSL program from the shaders
-		programID = LoadShaders("TransformVertexShader.vertexshader","TextureFragmentShader.fragmentshader");
+		//programID = LoadShaders("TransformVertexShader.vertexshader","TextureFragmentShader.fragmentshader");
 
 
 		/*********************************************/
@@ -219,22 +222,22 @@ static int createImage(void){
 		/************************************/
 
 		// Load the texture using any two methods
-		Texture = loadBMP_custom("../Images/aperture-science.bmp");
+		//Texture = loadBMP_custom("../Images/aperture-science.bmp");
 		//GLuint Texture = loadDDS("uvtemplate.DDS");
 		//GLuint Texture = loadTGA_glfw("uvtemplate.tga");
 
 		// Get a handle for our "myTextureSampler" uniform
-		TextureID  = glGetUniformLocation(programID, "myTextureSampler");
+		//TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
 
 		 // Two UV coordinatesfor each vertex. They were created withe Blender.
 		static const GLfloat g_uv_buffer_data[] = {
 			1.0f, 1.0f,
-			0.0f, 0.0f,
+			1.0f, 0.0f,
 			0.0f, 1.0f,
 			1.0f, 0.0f,
 			0.0f, 0.0f,
-			1.0f, 1.0f,
+			0.0f, 1.0f,
 
 		};
 
@@ -270,22 +273,43 @@ static int createImage(void){
 static void draw(void){
 
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 		// Use our shader
-		glUseProgram(programID);
+		//glUseProgram(programID);
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		// For each model you render, since the MVP will be different (at least the M part)
-		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+		//glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		// Bind our texture in Texture Unit 0
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, Texture);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, Texture);
 		// Set our "myTextureSampler" sampler to user Texture Unit 0
-		glUniform1i(TextureID, 0);
+		//glUniform1i(TextureID, 0);
 
+		GLuint texture[1];
+	/* load an image file directly as a new OpenGL texture */
+		texture[0] = SOIL_load_OGL_texture
+			(
+			"../Images/aperture-science.bmp",
+			SOIL_LOAD_AUTO,
+			SOIL_CREATE_NEW_ID,
+			SOIL_FLAG_INVERT_Y
+			);
+
+		if(texture[0] == 0)
+			fprintf(stderr, "no texture found\n");
+
+
+		// Typical Texture Generation Using Data From The Bitmap
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture[0]);
+		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+		                                          // Return Success
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -310,6 +334,7 @@ static void draw(void){
 				(void*)0                          // array buffer offset
 		);
 
+
 		// Draw triangles !
 		glDrawArrays(GL_TRIANGLES, 0, 2*3); // Starting from vertex 0; 3 vertices total -> 1 triangle
 
@@ -317,7 +342,7 @@ static void draw(void){
 		glDisableVertexAttribArray(1);
 
 	    // Swap buffers
-	    glfwSwapBuffers();
+	   // glfwSwapBuffers();
 
 
 
@@ -428,6 +453,7 @@ static void Display(void)
 {
     GLdouble p[16];
 	GLdouble m[16];
+	int change_context = 0;
 
 	// Select correct buffer for this context.
 	glDrawBuffer(GL_BACK);
@@ -462,14 +488,22 @@ static void Display(void)
 		// All lighting and geometry to be drawn relative to the marker goes here.
 
 		draw();
-
+		change_context = 1;
 		//glDeleteBuffers(1, &vertexbuffer);
 		//glDeleteBuffers(1, &uvbuffer);
 		//glDeleteProgram(programID);
 		//glDeleteVertexArrays(1, &VertexArrayID);
 
-	} // gPatt_found
 
+
+	}// gPatt_found
+	// Setup argl library for current context.
+	if (change_context == 1){
+		//glutPostRedisplay();
+		change_context = 0;
+		fprintf(stderr, "change_context\n");
+
+	}
 	// Any 2D overlays go here.
 	//none
 
@@ -488,6 +522,9 @@ void keycheck(unsigned char in_key,int mouse_x,int mouse_y){
 	// Check if the ESC key was pressed or the window was closed
 	if(in_key==27){
 		Quit();
+	}
+	if(in_key==' '){
+
 	}
 }
 
@@ -509,12 +546,11 @@ int main (int argc, char** argv){
 
 	glutInit(&argc, argv);
 
-//setup Camera, obtention des paramètres
+//setup Camera, obtention des paramètres et capture des images
 	if (setupCamera(cparam_name,vconf,&gARTCparam) < 0) {
 		fprintf(stderr, "Unable to setup camera.\n");
 		exit (-1);
 	}
-
 
 // Set up GL context(s) for OpenGL to draw into.
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

@@ -46,6 +46,7 @@
 <listOptionValue builtIn="false" value="/usr/lib/i386-linux-gnu/glib-2.0/include"/>
 <listOptionValue builtIn="false" value="/usr/local/include"/>
 <listOptionValue builtIn="false" value="&quot;../../Project C++/Include&quot;"/>
+<listOptionValue builtIn="false" value="/usr/include/SOIL"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.78356018" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
@@ -73,6 +74,7 @@
 <listOptionValue builtIn="false" value="/usr/include/libxml2"/>
 <listOptionValue builtIn="false" value="/usr/lib/i386-linux-gnu/glib-2.0/include"/>
 <listOptionValue builtIn="false" value="/usr/local/include"/>
+<listOptionValue builtIn="false" value="/usr/include/SOIL"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.658873380" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
@@ -81,6 +83,7 @@
 <option id="gnu.cpp.link.option.libs.2055027077" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 <listOptionValue builtIn="false" value="GLEW"/>
 <listOptionValue builtIn="false" value="glfw"/>
+<listOptionValue builtIn="false" value="SOIL"/>
 <listOptionValue builtIn="false" value="ARgsubUtil"/>
 <listOptionValue builtIn="false" value="ARvideo"/>
 <listOptionValue builtIn="false" value="ARgsub_lite"/>
@@ -103,6 +106,7 @@
 <option id="gnu.cpp.link.option.paths.804653768" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 <listOptionValue builtIn="false" value="&quot;lib/glew-1.9.0&quot;"/>
 <listOptionValue builtIn="false" value="&quot;lib/glfw-2.7.6/lib/x11&quot;"/>
+<listOptionValue builtIn="false" value="&quot;../lib/SOIL&quot;"/>
 <listOptionValue builtIn="false" value="&quot;../lib/ARToolKit/lib&quot;"/>
 <listOptionValue builtIn="false" value="/usr/X11R6/lib"/>
 <listOptionValue builtIn="false" value="/usr/lib"/>
@@ -128,6 +132,7 @@
 <listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.6/include"/>
 <listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.6/include-fixed"/>
 <listOptionValue builtIn="false" value="/usr/include/GL"/>
+<listOptionValue builtIn="false" value="/usr/include/SOIL"/>
 <listOptionValue builtIn="false" value="/usr/include/glib-2.0"/>
 <listOptionValue builtIn="false" value="&quot;../../Project C++/lib/ARToolKit/include&quot;"/>
 <listOptionValue builtIn="false" value="/usr/include/gstreamer-0.10"/>

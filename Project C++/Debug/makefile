@@ -45,7 +45,7 @@ all: ProjectC++
 ProjectC++: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"lib/glew-1.9.0" -L"lib/glfw-2.7.6/lib/x11" -L"../lib/ARToolKit/lib" -L/usr/X11R6/lib -L/usr/lib -o"ProjectC++" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"lib/glew-1.9.0" -L"lib/glfw-2.7.6/lib/x11" -L"../lib/SOIL" -L"../lib/ARToolKit/lib" -L/usr/X11R6/lib -L/usr/lib -o"ProjectC++" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

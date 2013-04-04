@@ -512,8 +512,9 @@ int main (int argc, char** argv){
 	} else {
 		glutInitWindowSize(prefWidth, prefHeight);
 		glutCreateWindow(argv[0]);
+		glutSetWindowTitle ("Playground");
 	}
-	glfwSetWindowTitle( "Playground" );
+
 
 	// Setup argl library for current context.
 	if ((gArglSettings = arglSetupForCurrentContext()) == NULL) {

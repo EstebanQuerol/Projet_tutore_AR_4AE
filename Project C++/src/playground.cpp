@@ -72,7 +72,7 @@ static long			gCallCountMarkerDetect = 0;
 
 GLuint programID;
 GLuint MatrixID;
-unsigned int Texture;
+GLuint Texture;
 GLuint TextureID;
 GLuint VertexArrayID;
 glm::mat4 MVP;
@@ -298,13 +298,14 @@ static void draw(void){
 			SOIL_CREATE_NEW_ID,
 			SOIL_FLAG_INVERT_Y
 			);
+		fprintf(stderr, "texture found\n");
 
 		if(texture[0] == 0)
 			fprintf(stderr, "no texture found\n");
 
 
 		// Typical Texture Generation Using Data From The Bitmap
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(texture[0]);
 		glBindTexture(GL_TEXTURE_2D, texture[0]);
 		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);

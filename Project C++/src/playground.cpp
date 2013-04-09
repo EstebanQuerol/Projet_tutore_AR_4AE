@@ -17,7 +17,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 using namespace glm;
-#include "SOIL.h"
+//#include "SOIL.h"
 
 //AR includes
 #include <GL/glut.h>
@@ -290,19 +290,6 @@ static void draw(void){
 		//glUniform1i(TextureID, 0);
 
 		GLuint texture[1];
-	/* load an image file directly as a new OpenGL texture */
-		texture[0] = SOIL_load_OGL_texture
-			(
-			"../Images/aperture-science.bmp",
-			SOIL_LOAD_AUTO,
-			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_INVERT_Y
-			);
-		fprintf(stderr, "texture found\n");
-
-		if(texture[0] == 0)
-			fprintf(stderr, "no texture found\n");
-
 
 		// Typical Texture Generation Using Data From The Bitmap
 		glActiveTexture(texture[0]);

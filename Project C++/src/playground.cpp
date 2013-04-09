@@ -17,7 +17,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 using namespace glm;
-//#include "SOIL.h"
+#include "SOIL.h"
 
 //AR includes
 #include <GL/glut.h>
@@ -197,25 +197,9 @@ static void draw(void){
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 
-<<<<<<< HEAD
 	glBegin (GL_QUADS);
 			   glTexCoord2f(0.0f, 0.0f);
 			   glVertex3f(0.0f, 0.0f,  0.0f);  // Bottom Left Of The Texture and Quad
-
-=======
-		// Send our transformation to the currently bound shader,
-		// in the "MVP" uniform
-		// For each model you render, since the MVP will be different (at least the M part)
-		//glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
-		// Bind our texture in Texture Unit 0
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, Texture);
-		// Set our "myTextureSampler" sampler to user Texture Unit 0
-		//glUniform1i(TextureID, 0);
-
-		GLuint texture[1];
->>>>>>> refs/heads/master
 
 			   glTexCoord2f(1.0f, 0.0f);
 			   glVertex3f(1.5f, 0.0f,  0.0f);  // Bottom Left Of The Texture and Quad

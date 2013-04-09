@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 //OpenGL includes
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -18,6 +17,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 using namespace glm;
+#include "SOIL.h"
 
 //AR includes
 #include <GL/glut.h>
@@ -27,11 +27,9 @@ using namespace glm;
 #include <AR/ar.h>
 #include <AR/gsub_lite.h>
 
-
 //Own functions includes
 #include <shader.hpp>
 #include <texture.hpp>
-
 
 // ============================================================================
 //	Constants
@@ -39,7 +37,6 @@ using namespace glm;
 #define VIEW_SCALEFACTOR		0.025		// 1.0 ARToolKit unit becomes 0.025 of my OpenGL units.
 #define VIEW_DISTANCE_MIN		0.1			// Objects closer to the camera than this will not be displayed.
 #define VIEW_DISTANCE_MAX		100.0		// Objects further away from the camera than this will not be displayed.
-
 
 // ============================================================================
 //	Global variables
@@ -69,6 +66,19 @@ static int			gPatt_id;				// Per-marker, but we are using only 1 marker.
 // Marker detection.
 static int			gARTThreshhold = 100;
 static long			gCallCountMarkerDetect = 0;
+
+// OpenGL3.3
+
+
+GLuint programID;
+GLuint MatrixID;
+GLuint Texture;
+GLuint TextureID;
+GLuint VertexArrayID;
+glm::mat4 MVP;
+
+GLuint vertexbuffer;
+GLuint uvbuffer;
 
 /******************************************/
 /*Functions*/
@@ -118,8 +128,212 @@ static int setupMarker(const char *patt_name, int *patt_id)
 
 	return (TRUE);
 }
+static int createImage(void){
 
+		/************************************************/
+		/*Setting up the window*/
+		/**************************************/
+		/*glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
+		glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE,GL_TRUE);
+		glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
+		glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
+		glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+		// Open a window and create its OpenGL context
+		if( !glfwOpenWindow( 1024, 768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
+		{
+			fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+			glfwTerminate();
+			//return -1;
+		}*/
+
+	// Initialize GLEW
+		glewExperimental = true; // Needed for core profile
+		if (glewInit() != GLEW_OK) {
+			fprintf(stderr, "Failed to initialize GLEW\n");
+			//return -1;
+		}
+	// Initialize GLFW
+		if( !glfwInit() )
+		{
+			fprintf( stderr, "Failed to initialize GLFW\n" );
+			return -1;
+		}
+
+
+		// Ensure we can capture the escape key being pressed below
+		glfwEnable( GLFW_STICKY_KEYS );
+
+		// Dark blue background
+		//glClearColor(0.5f, 0.0f, 0.4f, 0.0f);
+
+		// GLVertexArray structure declaration
+
+		glGenVertexArrays(1, &VertexArrayID);
+		glBindVertexArray(VertexArrayID);
+
+		/***********************************************/
+		/*Shaders*/
+		/***********************************************/
+
+		// Create and compile our GLSL program from the shaders
+		//programID = LoadShaders("TransformVertexShader.vertexshader","TextureFragmentShader.fragmentshader");
+
+
+		/*********************************************/
+		/***Perspective,view and model matrix***/
+		/***********************************************/
+
+		// Get a handle for our "MVP" uniform
+		MatrixID = glGetUniformLocation(programID, "MVP");
+
+		// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+		glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+
+		// Camera matrix
+		glm::mat4 View       = glm::lookAt(
+									glm::vec3(0.75,1,3), // Camera is at (4,3,3), in World Space
+									glm::vec3(0.75,1,0), // and looks at the origin
+									glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+							   );
+		// Model matrix : an identity matrix (model will be at the origin)
+		glm::mat4 Model      = glm::mat4(1.0f);
+
+
+		// Our ModelViewProjection : multiplication of our 3 matrices
+		MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
+
+
+		/**************************************************/
+		/*We create our model using simple vertices of 3 coordintes each*/
+		/**************************************************/
+
+		static const GLfloat g_vertex_buffer_data[] = {
+			1.5f,2.0f,0.0f, // triangle 1 : begin
+			1.5f,0.0f, 0.0f,
+			0.0f, 2.0f, 0.0f, // triangle 1 : end
+			1.5f, 0.0f, 0.0f, // triangle 2 : begin
+			0.0f,0.0f,0.0f,
+			0.0f, 2.0f, 0.0f, // triangle 2 : end
+		};
+
+		/************************************/
+		/*Adding textures*/
+		/************************************/
+
+		// Load the texture using any two methods
+		//Texture = loadBMP_custom("../Images/aperture-science.bmp");
+		//GLuint Texture = loadDDS("uvtemplate.DDS");
+		//GLuint Texture = loadTGA_glfw("uvtemplate.tga");
+
+		// Get a handle for our "myTextureSampler" uniform
+		//TextureID  = glGetUniformLocation(programID, "myTextureSampler");
+
+
+		 // Two UV coordinatesfor each vertex. They were created withe Blender.
+		static const GLfloat g_uv_buffer_data[] = {
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 1.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+			0.0f, 1.0f,
+
+		};
+
+		//static const GLushort g_element_buffer_data[] = { 0, 1, 2 };
+
+		// Enable depth test
+		glEnable(GL_DEPTH_TEST);
+		// Accept fragment if it closer to the camera than the former one
+		glDepthFunc(GL_LESS);
+
+
+		// This will identify our vertex buffer
+		//GLuint vertexbuffer;
+
+		// Generate 1 buffer, put the resulting identifier in vertexbuffer
+		glGenBuffers(1, &vertexbuffer);
+
+		// The following commands will talk about our 'vertexbuffer' buffer
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+
+		// Give our vertices to OpenGL.
+		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+		//GLuint uvbuffer;
+		glGenBuffers(1, &uvbuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+
+		return 0;
+
+
+}
 static void draw(void){
+
+
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		// Use our shader
+		//glUseProgram(programID);
+
+		// Send our transformation to the currently bound shader,
+		// in the "MVP" uniform
+		// For each model you render, since the MVP will be different (at least the M part)
+		//glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+
+		// Bind our texture in Texture Unit 0
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, Texture);
+		// Set our "myTextureSampler" sampler to user Texture Unit 0
+		//glUniform1i(TextureID, 0);
+
+		GLuint texture[1];
+	/* load an image file directly as a new OpenGL texture */
+		texture[0] = SOIL_load_OGL_texture
+			(
+			"../Images/aperture-science.bmp",
+			SOIL_LOAD_AUTO,
+			SOIL_CREATE_NEW_ID,
+			SOIL_FLAG_INVERT_Y
+			);
+		fprintf(stderr, "texture found\n");
+
+		if(texture[0] == 0)
+			fprintf(stderr, "no texture found\n");
+
+
+		// Typical Texture Generation Using Data From The Bitmap
+		glActiveTexture(texture[0]);
+		glBindTexture(GL_TEXTURE_2D, texture[0]);
+		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+		                                          // Return Success
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glVertexAttribPointer(
+				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+				3,                  // size
+				GL_FLOAT,           // type
+				GL_FALSE,           // normalized?
+				0,                  // stride
+				(void*)0            // array buffer offset
+		);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+		glVertexAttribPointer(
+				1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+				2,                                // size : U+V => 2
+				GL_FLOAT,                         // type
+				GL_FALSE,                         // normalized?
+				0,                                // stride
+				(void*)0                          // array buffer offset
+		);
 
 
 		// Draw triangles !
@@ -129,7 +343,7 @@ static void draw(void){
 		glDisableVertexAttribArray(1);
 
 	    // Swap buffers
-	    glfwSwapBuffers();
+	   // glfwSwapBuffers();
 
 
 
@@ -142,11 +356,11 @@ static void Quit(void)
 	arVideoCapStop();
 	arVideoClose();
 	// Cleanup VBO
-	//glDeleteBuffers(1, &vertexbuffer);
+	glDeleteBuffers(1, &vertexbuffer);
 	//glDeleteBuffers(1, &colorbuffer);
-	//glDeleteBuffers(1, &uvbuffer);
-	//glDeleteProgram(programID);
-	//glDeleteVertexArrays(1, &VertexArrayID);
+	glDeleteBuffers(1, &uvbuffer);
+	glDeleteProgram(programID);
+	glDeleteVertexArrays(1, &VertexArrayID);
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 	exit(0);
@@ -240,6 +454,7 @@ static void Display(void)
 {
     GLdouble p[16];
 	GLdouble m[16];
+	int change_context = 0;
 
 	// Select correct buffer for this context.
 	glDrawBuffer(GL_BACK);
@@ -265,16 +480,27 @@ static void Display(void)
 	//none
 
 	if (gPatt_found) {
-
 		// Calculate the camera position relative to the marker.
+
 		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
 		arglCameraViewRH(gPatt_trans, m, VIEW_SCALEFACTOR);
 		glLoadMatrixd(m);
 
 
+		// All lighting and geometry to be drawn relative to the marker goes here.
+
+		draw();
+		change_context = 1;
+		//glDeleteBuffers(1, &vertexbuffer);
+		//glDeleteBuffers(1, &uvbuffer);
+		//glDeleteProgram(programID);
+		//glDeleteVertexArrays(1, &VertexArrayID);
 
 
-	} // gPatt_found
+
+
+	}// gPatt_found
+	// Setup argl library for current context.
 
 	// Any 2D overlays go here.
 	//none
@@ -295,6 +521,9 @@ void keycheck(unsigned char in_key,int mouse_x,int mouse_y){
 	if(in_key==27){
 		Quit();
 	}
+	if(in_key==' '){
+
+	}
 }
 
 int main (int argc, char** argv){
@@ -309,22 +538,18 @@ int main (int argc, char** argv){
 #endif
 		const char *patt_name  = "../../lib/ARToolKit/bin/Data/patt.hiro";
 // ----------------------------------------------------------------------------
-	// Library inits.
-	//
+
+// Library inits.
+
 
 	glutInit(&argc, argv);
 
+//setup Camera, obtention des paramètres et capture des images
 	if (setupCamera(cparam_name,vconf,&gARTCparam) < 0) {
 		fprintf(stderr, "Unable to setup camera.\n");
 		exit (-1);
 	}
 
-// Initialise GLFW
-	if( !glfwInit() )
-	{
-		fprintf( stderr, "Failed to initialize GLFW\n" );
-		return -1;
-	}
 // Set up GL context(s) for OpenGL to draw into.
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	if (!prefWindowed) {
@@ -335,8 +560,9 @@ int main (int argc, char** argv){
 	} else {
 		glutInitWindowSize(prefWidth, prefHeight);
 		glutCreateWindow(argv[0]);
+		glutSetWindowTitle ("Playground");
 	}
-	glfwSetWindowTitle( "Playground" );
+
 
 	// Setup argl library for current context.
 	if ((gArglSettings = arglSetupForCurrentContext()) == NULL) {
@@ -354,7 +580,7 @@ int main (int argc, char** argv){
 
 
 
-
+    createImage();
 
 
 	glutDisplayFunc(Display);

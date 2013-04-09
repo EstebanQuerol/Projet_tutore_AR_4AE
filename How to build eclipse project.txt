@@ -1,8 +1,0 @@
-
-1-Ouvrir eclipse et vous placer dans votre Workspace habituel.
-2-Ouvrir la perspective GIT.
-3-Clicker sur "Clone existing Project"
-4-Ajouter l'URL :"https://github.com/Narik/Projet_tutore_AR_4AE.git" dans "URI"
-5-Mettre votre nom d'utilisateur/mot de pas pour github. Clicker next.
-6-Clicker sur l'option "add existing projects to workspace"
-7-Finish

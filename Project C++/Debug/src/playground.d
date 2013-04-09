@@ -74,6 +74,7 @@ src/playground.d: ../src/playground.cpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../core/_fixes.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtc/matrix_transform.hpp \
  ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/transform.inl \
+ ../../Project\ C++/Include/SOIL.h \
  ../../Project\ C++/lib/ARToolKit/include/AR/config.h \
  ../../Project\ C++/lib/ARToolKit/include/AR/video.h \
  ../../Project\ C++/lib/ARToolKit/include/AR/ar.h \
@@ -232,6 +233,8 @@ src/playground.d: ../src/playground.cpp \
 ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/../gtc/matrix_transform.hpp:
 
 ../../Project\ C++/lib/glm-0.9.4.0/glm/gtx/transform.inl:
+
+../../Project\ C++/Include/SOIL.h:
 
 ../../Project\ C++/lib/ARToolKit/include/AR/config.h:
 

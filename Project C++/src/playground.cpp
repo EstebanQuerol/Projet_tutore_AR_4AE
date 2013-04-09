@@ -34,7 +34,7 @@ using namespace glm;
 // ============================================================================
 //	Constants
 // ============================================================================
-#define VIEW_SCALEFACTOR		0.025		// 1.0 ARToolKit unit becomes 0.025 of my OpenGL units.
+#define VIEW_SCALEFACTOR		0.012		// 1.0 ARToolKit unit becomes 0.025 of my OpenGL units.
 #define VIEW_DISTANCE_MIN		0.1			// Objects closer to the camera than this will not be displayed.
 #define VIEW_DISTANCE_MAX		100.0		// Objects further away from the camera than this will not be displayed.
 
@@ -52,6 +52,7 @@ static int prefRefresh = 0;					// Fullscreen mode refresh rate. Set to 0 to use
 // Drawing
 static ARParam		gARTCparam;//camera parameters structure
 static ARGL_CONTEXT_SETTINGS_REF gArglSettings = NULL;
+GLuint texture[1];
 
 // Image acquisition.
 static ARUint8		*gARTImage = NULL;
@@ -80,6 +81,28 @@ glm::mat4 MVP;
 GLuint vertexbuffer;
 GLuint uvbuffer;
 
+//Image path
+//For now paths are static but looking to do it dynamic in the future
+char * imgpath="../Images/Pedro_Company.jpg";;
+char * img1="../Images/Pedro_Company.jpg";
+char * img2="../Images/aperture-science.bmp";
+//imgpath=img1;
+
+
+//imgpath="../Images/Pedro_Company.jpg";
+//imgpath[1]="../Images/aperture-science.jpg";
+static int createImage(void);
+
+void switchimage(void){
+	if (imgpath==img1){
+		imgpath=img2;
+		createImage();
+	}
+	else{
+		imgpath=img1;
+		createImage();
+	}
+}
 /******************************************/
 /*Functions*/
 /******************************************/
@@ -130,141 +153,38 @@ static int setupMarker(const char *patt_name, int *patt_id)
 }
 static int createImage(void){
 
-		/************************************************/
-		/*Setting up the window*/
-		/**************************************/
-		/*glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
-		glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE,GL_TRUE);
-		glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
-		glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-		glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	// Initialize GLEW(for mipmaps)
+	glewExperimental = true; // Needed for core profile
+	if (glewInit() != GLEW_OK) {
+		fprintf(stderr, "Failed to initialize GLEW\n");
+		return -1;
+	}
 
-		// Open a window and create its OpenGL context
-		if( !glfwOpenWindow( 1024, 768, 0,0,0,0, 32,0, GLFW_WINDOW ) )
-		{
-			fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
-			glfwTerminate();
-			//return -1;
-		}*/
+	glEnable(GL_TEXTURE_2D);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_DEPTH_TEST);
+	// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
 
-	// Initialize GLEW
-		glewExperimental = true; // Needed for core profile
-		if (glewInit() != GLEW_OK) {
-			fprintf(stderr, "Failed to initialize GLEW\n");
-			//return -1;
-		}
-	// Initialize GLFW
-		if( !glfwInit() )
-		{
-			fprintf( stderr, "Failed to initialize GLFW\n" );
-			return -1;
-		}
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+   glGenerateMipmap(GL_TEXTURE_2D);
+   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
 
+   glGenTextures(1,&texture[0]);//Memory allocation
+   /* load an image file directly as a new OpenGL texture */
+	texture[0] = SOIL_load_OGL_texture
+		(
+		imgpath,
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS
+		);
+	printf("texture found\n");
 
-		// Ensure we can capture the escape key being pressed below
-		glfwEnable( GLFW_STICKY_KEYS );
-
-		// Dark blue background
-		//glClearColor(0.5f, 0.0f, 0.4f, 0.0f);
-
-		// GLVertexArray structure declaration
-
-		glGenVertexArrays(1, &VertexArrayID);
-		glBindVertexArray(VertexArrayID);
-
-		/***********************************************/
-		/*Shaders*/
-		/***********************************************/
-
-		// Create and compile our GLSL program from the shaders
-		//programID = LoadShaders("TransformVertexShader.vertexshader","TextureFragmentShader.fragmentshader");
-
-
-		/*********************************************/
-		/***Perspective,view and model matrix***/
-		/***********************************************/
-
-		// Get a handle for our "MVP" uniform
-		MatrixID = glGetUniformLocation(programID, "MVP");
-
-		// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-		glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-
-		// Camera matrix
-		glm::mat4 View       = glm::lookAt(
-									glm::vec3(0.75,1,3), // Camera is at (4,3,3), in World Space
-									glm::vec3(0.75,1,0), // and looks at the origin
-									glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-							   );
-		// Model matrix : an identity matrix (model will be at the origin)
-		glm::mat4 Model      = glm::mat4(1.0f);
-
-
-		// Our ModelViewProjection : multiplication of our 3 matrices
-		MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
-
-
-		/**************************************************/
-		/*We create our model using simple vertices of 3 coordintes each*/
-		/**************************************************/
-
-		static const GLfloat g_vertex_buffer_data[] = {
-			1.5f,2.0f,0.0f, // triangle 1 : begin
-			1.5f,0.0f, 0.0f,
-			0.0f, 2.0f, 0.0f, // triangle 1 : end
-			1.5f, 0.0f, 0.0f, // triangle 2 : begin
-			0.0f,0.0f,0.0f,
-			0.0f, 2.0f, 0.0f, // triangle 2 : end
-		};
-
-		/************************************/
-		/*Adding textures*/
-		/************************************/
-
-		// Load the texture using any two methods
-		//Texture = loadBMP_custom("../Images/aperture-science.bmp");
-		//GLuint Texture = loadDDS("uvtemplate.DDS");
-		//GLuint Texture = loadTGA_glfw("uvtemplate.tga");
-
-		// Get a handle for our "myTextureSampler" uniform
-		//TextureID  = glGetUniformLocation(programID, "myTextureSampler");
-
-
-		 // Two UV coordinatesfor each vertex. They were created withe Blender.
-		static const GLfloat g_uv_buffer_data[] = {
-			1.0f, 1.0f,
-			1.0f, 0.0f,
-			0.0f, 1.0f,
-			1.0f, 0.0f,
-			0.0f, 0.0f,
-			0.0f, 1.0f,
-
-		};
-
-		//static const GLushort g_element_buffer_data[] = { 0, 1, 2 };
-
-		// Enable depth test
-		glEnable(GL_DEPTH_TEST);
-		// Accept fragment if it closer to the camera than the former one
-		glDepthFunc(GL_LESS);
-
-
-		// This will identify our vertex buffer
-		//GLuint vertexbuffer;
-
-		// Generate 1 buffer, put the resulting identifier in vertexbuffer
-		glGenBuffers(1, &vertexbuffer);
-
-		// The following commands will talk about our 'vertexbuffer' buffer
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-
-		// Give our vertices to OpenGL.
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-		//GLuint uvbuffer;
-		glGenBuffers(1, &uvbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+	if(texture[0] == 0)
+		fprintf(stderr, "no texture found\n");
 
 		return 0;
 
@@ -273,80 +193,26 @@ static int createImage(void){
 static void draw(void){
 
 
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-		// Use our shader
-		//glUseProgram(programID);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
 
-		// Send our transformation to the currently bound shader,
-		// in the "MVP" uniform
-		// For each model you render, since the MVP will be different (at least the M part)
-		//glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
-		// Bind our texture in Texture Unit 0
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, Texture);
-		// Set our "myTextureSampler" sampler to user Texture Unit 0
-		//glUniform1i(TextureID, 0);
-
-		GLuint texture[1];
-	/* load an image file directly as a new OpenGL texture */
-		texture[0] = SOIL_load_OGL_texture
-			(
-			"../Images/aperture-science.bmp",
-			SOIL_LOAD_AUTO,
-			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_INVERT_Y
-			);
-		fprintf(stderr, "texture found\n");
-
-		if(texture[0] == 0)
-			fprintf(stderr, "no texture found\n");
+	glBegin (GL_QUADS);
+			   glTexCoord2f(0.0f, 0.0f);
+			   glVertex3f(0.0f, 0.0f,  0.0f);  // Bottom Left Of The Texture and Quad
 
 
-		// Typical Texture Generation Using Data From The Bitmap
-		glActiveTexture(texture[0]);
-		glBindTexture(GL_TEXTURE_2D, texture[0]);
-		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-		//glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+			   glTexCoord2f(1.0f, 0.0f);
+			   glVertex3f(1.5f, 0.0f,  0.0f);  // Bottom Left Of The Texture and Quad
 
-		                                          // Return Success
-		// 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-				3,                  // size
-				GL_FLOAT,           // type
-				GL_FALSE,           // normalized?
-				0,                  // stride
-				(void*)0            // array buffer offset
-		);
-
-		// 2nd attribute buffer : UVs
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-		glVertexAttribPointer(
-				1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-				2,                                // size : U+V => 2
-				GL_FLOAT,                         // type
-				GL_FALSE,                         // normalized?
-				0,                                // stride
-				(void*)0                          // array buffer offset
-		);
+			   glTexCoord2f(1.0f, 1.0f);
+			   glVertex3f(1.5f, 2.0f,  0.0f);  // Bottom Left Of The Texture and Quad
 
 
-		// Draw triangles !
-		glDrawArrays(GL_TRIANGLES, 0, 2*3); // Starting from vertex 0; 3 vertices total -> 1 triangle
+			   glTexCoord2f(0.0f, 1.0f);
+			   glVertex3f(0.0f, 2.0f,  0.0f);  // Bottom Left Of The Texture and Quad
 
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-
-	    // Swap buffers
-	   // glfwSwapBuffers();
-
-
-
+	glEnd();
 
 }
 
@@ -362,7 +228,7 @@ static void Quit(void)
 	glDeleteProgram(programID);
 	glDeleteVertexArrays(1, &VertexArrayID);
 	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
+	glDeleteTextures(1,&texture[0]);
 	exit(0);
 }
 
@@ -454,7 +320,6 @@ static void Display(void)
 {
     GLdouble p[16];
 	GLdouble m[16];
-	int change_context = 0;
 
 	// Select correct buffer for this context.
 	glDrawBuffer(GL_BACK);
@@ -490,13 +355,6 @@ static void Display(void)
 		// All lighting and geometry to be drawn relative to the marker goes here.
 
 		draw();
-		change_context = 1;
-		//glDeleteBuffers(1, &vertexbuffer);
-		//glDeleteBuffers(1, &uvbuffer);
-		//glDeleteProgram(programID);
-		//glDeleteVertexArrays(1, &VertexArrayID);
-
-
 
 
 	}// gPatt_found
@@ -517,12 +375,15 @@ static void Display(void)
 
 void keycheck(unsigned char in_key,int mouse_x,int mouse_y){
 
-	// Check if the ESC key was pressed or the window was closed
+	// Check if the ESC key was pressed
 	if(in_key==27){
 		Quit();
 	}
 	if(in_key==' '){
 
+	}
+	if(in_key=='n'){
+		switchimage();
 	}
 }
 
@@ -549,6 +410,7 @@ int main (int argc, char** argv){
 		fprintf(stderr, "Unable to setup camera.\n");
 		exit (-1);
 	}
+
 
 // Set up GL context(s) for OpenGL to draw into.
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

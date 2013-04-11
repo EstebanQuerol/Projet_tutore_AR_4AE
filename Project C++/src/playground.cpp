@@ -58,15 +58,34 @@ GLuint texture[1];
 static ARUint8		*gARTImage = NULL;
 
 // Transformation matrix retrieval.
-static double		gPatt_width     = 80.0;	// Per-marker, but we are using only 1 marker.
-static double		gPatt_centre[2] = {0.0, 0.0}; // Per-marker, but we are using only 1 marker.
-static double		gPatt_trans[3][4];		// Per-marker, but we are using only 1 marker.
-static int			gPatt_found = FALSE;	// Per-marker, but we are using only 1 marker.
-static int			gPatt_id;				// Per-marker, but we are using only 1 marker.
+static double		gPatt_width_I     = 42.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_centre_I[2] = {-28.0, 160.0}; // Per-marker, but we are using only 1 marker.
+static double		gPatt_trans_I[3][4];		// Per-marker, but we are using only 1 marker.
+static int			gPatt_found_I = FALSE;	// Per-marker, but we are using only 1 marker.
+static int			gPatt_id_I;				// Per-marker, but we are using only 1 marker.
+
+static double		gPatt_width_N     = 42.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_centre_N[2] = {-28.0, 111.0}; // Per-marker, but we are using only 1 marker.
+static double		gPatt_trans_N[3][4];		// Per-marker, but we are using only 1 marker.
+static int			gPatt_found_N = FALSE;	// Per-marker, but we are using only 1 marker.
+static int			gPatt_id_N;				// Per-marker, but we are using only 1 marker.
+
+static double		gPatt_width_S     = 42.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_centre_S[2] = {-28.0, 62.0}; // Per-marker, but we are using only 1 marker.
+static double		gPatt_trans_S[3][4];		// Per-marker, but we are using only 1 marker.
+static int			gPatt_found_S = FALSE;	// Per-marker, but we are using only 1 marker.
+static int			gPatt_id_S;				// Per-marker, but we are using only 1 marker.
+
+static double		gPatt_width_A     = 42.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_centre_A[2] = {-28.0, 13.0}; // Per-marker, but we are using only 1 marker.
+static double		gPatt_trans_A[3][4];		// Per-marker, but we are using only 1 marker.
+static int			gPatt_found_A = FALSE;	// Per-marker, but we are using only 1 marker.
+static int			gPatt_id_A;				// Per-marker, but we are using only 1 marker.
 
 // Marker detection.
 static int			gARTThreshhold = 100;
 static long			gCallCountMarkerDetect = 0;
+
 
 // OpenGL3.3
 
@@ -83,7 +102,7 @@ GLuint uvbuffer;
 
 //Image path
 //For now paths are static but looking to do it dynamic in the future
-char * imgpath="../Images/Pedro_Company.jpg";;
+char * imgpath="../Images/Pedro_Company.jpg";
 char * img1="../Images/Pedro_Company.jpg";
 char * img2="../Images/aperture-science.bmp";
 //imgpath=img1;
@@ -266,7 +285,7 @@ static void Idle(void)
 		// visible marker matching our preferred pattern.
 		k = -1;
 		for (j = 0; j < marker_num; j++) {
-			if (marker_info[j].id == gPatt_id) {
+			if (marker_info[j].id == gPatt_id_I) {
 				if (k == -1) k = j; // First marker detected.
 				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
 			}
@@ -274,10 +293,58 @@ static void Idle(void)
 
 		if (k != -1) {
 			// Get the transformation between the marker and the real camera into gPatt_trans.
-			arGetTransMat(&(marker_info[k]), gPatt_centre, gPatt_width, gPatt_trans);
-			gPatt_found = TRUE;
+			arGetTransMat(&(marker_info[k]), gPatt_centre_I, gPatt_width_I, gPatt_trans_I);
+			gPatt_found_I = TRUE;
 		} else {
-			gPatt_found = FALSE;
+			gPatt_found_I = FALSE;
+		}
+
+		k = -1;
+		for (j = 0; j < marker_num; j++) {
+			if (marker_info[j].id == gPatt_id_N) {
+				if (k == -1) k = j; // First marker detected.
+				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
+			}
+		}
+
+		if (k != -1) {
+			// Get the transformation between the marker and the real camera into gPatt_trans.
+			arGetTransMat(&(marker_info[k]), gPatt_centre_N, gPatt_width_N, gPatt_trans_N);
+			gPatt_found_N = TRUE;
+		} else {
+			gPatt_found_N = FALSE;
+		}
+
+		k = -1;
+		for (j = 0; j < marker_num; j++) {
+			if (marker_info[j].id == gPatt_id_S) {
+				if (k == -1) k = j; // First marker detected.
+				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
+			}
+		}
+
+		if (k != -1) {
+			// Get the transformation between the marker and the real camera into gPatt_trans.
+			arGetTransMat(&(marker_info[k]), gPatt_centre_S, gPatt_width_S, gPatt_trans_S);
+			gPatt_found_S = TRUE;
+		} else {
+			gPatt_found_S = FALSE;
+		}
+
+		k = -1;
+		for (j = 0; j < marker_num; j++) {
+			if (marker_info[j].id == gPatt_id_A) {
+				if (k == -1) k = j; // First marker detected.
+				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
+			}
+		}
+
+		if (k != -1) {
+			// Get the transformation between the marker and the real camera into gPatt_trans.
+			arGetTransMat(&(marker_info[k]), gPatt_centre_A, gPatt_width_A, gPatt_trans_A);
+			gPatt_found_A = TRUE;
+		} else {
+			gPatt_found_A = FALSE;
 		}
 
 		// Tell GLUT the display has changed.
@@ -343,11 +410,53 @@ static void Display(void)
 	// (I.e. must be specified before viewing transformations.)
 	//none
 
-	if (gPatt_found) {
+	if (gPatt_found_I) {
 		// Calculate the camera position relative to the marker.
 
 		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
-		arglCameraViewRH(gPatt_trans, m, VIEW_SCALEFACTOR);
+		arglCameraViewRH(gPatt_trans_I, m, VIEW_SCALEFACTOR);
+		glLoadMatrixd(m);
+
+
+		// All lighting and geometry to be drawn relative to the marker goes here.
+
+		draw();
+
+
+	}
+	else if (gPatt_found_N) {
+		// Calculate the camera position relative to the marker.
+
+		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
+		arglCameraViewRH(gPatt_trans_N, m, VIEW_SCALEFACTOR);
+		glLoadMatrixd(m);
+
+
+		// All lighting and geometry to be drawn relative to the marker goes here.
+
+		draw();
+
+
+	}
+	else 	if (gPatt_found_S) {
+		// Calculate the camera position relative to the marker.
+
+		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
+		arglCameraViewRH(gPatt_trans_S, m, VIEW_SCALEFACTOR);
+		glLoadMatrixd(m);
+
+
+		// All lighting and geometry to be drawn relative to the marker goes here.
+
+		draw();
+
+
+	}
+	else 	if (gPatt_found_A) {
+		// Calculate the camera position relative to the marker.
+
+		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
+		arglCameraViewRH(gPatt_trans_A, m, VIEW_SCALEFACTOR);
 		glLoadMatrixd(m);
 
 
@@ -394,9 +503,13 @@ int main (int argc, char** argv){
 #ifdef _WIN32
 		char *vconf="Data\\WDM_camera_flipV.xml";
 #else
-		char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
+		//char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
+		char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! videoscale ! video/x-raw-yuv,width=620,height=460 ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
 #endif
-		const char *patt_name  = "../../lib/ARToolKit/bin/Data/patt.hiro";
+		const char *patt_I  = "../../Ressources/Patterns/I.pat";
+		const char *patt_N  = "../../Ressources/Patterns//N.pat";
+		const char *patt_S  = "../../Ressources/Patterns//S.pat";
+		const char *patt_A  = "../../Ressources/Patterns//A.pat";
 // ----------------------------------------------------------------------------
 
 // Library inits.
@@ -434,7 +547,19 @@ int main (int argc, char** argv){
 	glEnable(GL_DEPTH_TEST);
 	arUtilTimerReset();
 
-	if (!setupMarker(patt_name, &gPatt_id)) {
+	if (!setupMarker(patt_I, &gPatt_id_I)) {
+		fprintf(stderr, "main(): Unable to set up AR marker.\n");
+		Quit();
+	}
+	if (!setupMarker(patt_N, &gPatt_id_N)) {
+		fprintf(stderr, "main(): Unable to set up AR marker.\n");
+		Quit();
+	}
+	if (!setupMarker(patt_S, &gPatt_id_S)) {
+		fprintf(stderr, "main(): Unable to set up AR marker.\n");
+		Quit();
+	}
+	if (!setupMarker(patt_A, &gPatt_id_A)) {
 		fprintf(stderr, "main(): Unable to set up AR marker.\n");
 		Quit();
 	}
@@ -453,5 +578,3 @@ int main (int argc, char** argv){
 
 	return 0;
 }
-
-

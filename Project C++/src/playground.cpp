@@ -82,6 +82,21 @@ static double		gPatt_trans_A[3][4];		// Per-marker, but we are using only 1 mark
 static int			gPatt_found_A = FALSE;	// Per-marker, but we are using only 1 marker.
 static int			gPatt_id_A;				// Per-marker, but we are using only 1 marker.
 
+static double		gPatt_width_NEXT     = 50.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_centre_NEXT[2] = {0.0, 0.0}; // Per-marker, but we are using only 1 marker.
+static double		gPatt_trans_NEXT[3][4];		// Per-marker, but we are using only 1 marker.
+static int			gPatt_found_NEXT = FALSE;	// Per-marker, but we are using only 1 marker.
+static int			gPatt_id_NEXT;				// Per-marker, but we are using only 1 marker.
+
+static double		gPatt_width_PREV     = 50.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_centre_PREV[2] = {0.0, 0.0}; // Per-marker, but we are using only 1 marker.
+static double		gPatt_trans_PREV[3][4];		// Per-marker, but we are using only 1 marker.
+static int			gPatt_found_PREV = FALSE;	// Per-marker, but we are using only 1 marker.
+static int			gPatt_id_PREV;				// Per-marker, but we are using only 1 marker.
+
+static int			etat_PREV = TRUE;
+static int			etat_NEXT = TRUE;
+
 // Marker detection.
 static int			gARTThreshhold = 100;
 static long			gCallCountMarkerDetect = 0;
@@ -347,6 +362,52 @@ static void Idle(void)
 			gPatt_found_A = FALSE;
 		}
 
+		k = -1;
+		for (j = 0; j < marker_num; j++) {
+			if (marker_info[j].id == gPatt_id_NEXT) {
+				if (k == -1) k = j; // First marker detected.
+				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
+			}
+		}
+
+		if (k != -1) {
+			// Get the transformation between the marker and the real camera into gPatt_trans.
+			arGetTransMat(&(marker_info[k]), gPatt_centre_NEXT, gPatt_width_NEXT, gPatt_trans_NEXT);
+			gPatt_found_NEXT = TRUE;
+			if (etat_NEXT==FALSE) {
+				etat_NEXT=TRUE;
+			}
+		} else {
+			gPatt_found_NEXT = FALSE;
+			if (etat_NEXT==TRUE) {
+				etat_NEXT=FALSE;
+				switchimage();
+			}
+		}
+
+		k = -1;
+		for (j = 0; j < marker_num; j++) {
+			if (marker_info[j].id == gPatt_id_PREV) {
+				if (k == -1) k = j; // First marker detected.
+				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
+			}
+		}
+
+		if (k != -1) {
+			// Get the transformation between the marker and the real camera into gPatt_trans.
+			arGetTransMat(&(marker_info[k]), gPatt_centre_PREV, gPatt_width_PREV, gPatt_trans_PREV);
+			gPatt_found_PREV = TRUE;
+			if (etat_PREV==FALSE) {
+				etat_PREV=TRUE;
+			}
+		} else {
+			gPatt_found_PREV = FALSE;
+			if (etat_PREV==TRUE) {
+				etat_PREV=FALSE;
+				switchimage();
+			}
+		}
+
 		// Tell GLUT the display has changed.
 		glutPostRedisplay();
 	}
@@ -507,9 +568,11 @@ int main (int argc, char** argv){
 		char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! videoscale ! video/x-raw-yuv,width=620,height=460 ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
 #endif
 		const char *patt_I  = "../../Ressources/Patterns/I.pat";
-		const char *patt_N  = "../../Ressources/Patterns//N.pat";
-		const char *patt_S  = "../../Ressources/Patterns//S.pat";
-		const char *patt_A  = "../../Ressources/Patterns//A.pat";
+		const char *patt_N  = "../../Ressources/Patterns/N.pat";
+		const char *patt_S  = "../../Ressources/Patterns/S.pat";
+		const char *patt_A  = "../../Ressources/Patterns/A.pat";
+		const char *patt_NEXT = "../../Ressources/Patterns/NEXT.pat";
+		const char *patt_PREV = "../../Ressources/Patterns/PREV.pat";
 // ----------------------------------------------------------------------------
 
 // Library inits.
@@ -560,6 +623,14 @@ int main (int argc, char** argv){
 		Quit();
 	}
 	if (!setupMarker(patt_A, &gPatt_id_A)) {
+		fprintf(stderr, "main(): Unable to set up AR marker.\n");
+		Quit();
+	}
+	if (!setupMarker(patt_NEXT, &gPatt_id_NEXT)) {
+		fprintf(stderr, "main(): Unable to set up AR marker.\n");
+		Quit();
+	}
+	if (!setupMarker(patt_PREV, &gPatt_id_PREV)) {
 		fprintf(stderr, "main(): Unable to set up AR marker.\n");
 		Quit();
 	}

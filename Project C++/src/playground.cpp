@@ -12,7 +12,7 @@
 
 //OpenGL includes
 #include <GL/glew.h>
-#include <GL/glfw.h>
+//#include <GL/glfw.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -28,8 +28,8 @@ using namespace glm;
 #include <AR/gsub_lite.h>
 
 //Own functions includes
-#include <shader.hpp>
-#include <texture.hpp>
+//#include <shader.hpp>
+//#include <texture.hpp>
 
 // ============================================================================
 //	Constants

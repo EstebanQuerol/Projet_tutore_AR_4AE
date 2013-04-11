@@ -410,11 +410,25 @@ static void Display(void)
 	// (I.e. must be specified before viewing transformations.)
 	//none
 
-	if (gPatt_found_I) {
+	if (gPatt_found_A) {
+			// Calculate the camera position relative to the marker.
+
+			// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
+			arglCameraViewRH(gPatt_trans_A, m, VIEW_SCALEFACTOR);
+			glLoadMatrixd(m);
+
+
+			// All lighting and geometry to be drawn relative to the marker goes here.
+
+			draw();
+
+
+		}
+	else if (gPatt_found_S) {
 		// Calculate the camera position relative to the marker.
 
 		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
-		arglCameraViewRH(gPatt_trans_I, m, VIEW_SCALEFACTOR);
+		arglCameraViewRH(gPatt_trans_S, m, VIEW_SCALEFACTOR);
 		glLoadMatrixd(m);
 
 
@@ -438,11 +452,11 @@ static void Display(void)
 
 
 	}
-	else 	if (gPatt_found_S) {
+	else if (gPatt_found_I) {
 		// Calculate the camera position relative to the marker.
 
 		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
-		arglCameraViewRH(gPatt_trans_S, m, VIEW_SCALEFACTOR);
+		arglCameraViewRH(gPatt_trans_I, m, VIEW_SCALEFACTOR);
 		glLoadMatrixd(m);
 
 
@@ -451,21 +465,7 @@ static void Display(void)
 		draw();
 
 
-	}
-	else 	if (gPatt_found_A) {
-		// Calculate the camera position relative to the marker.
-
-		// Replace VIEW_SCALEFACTOR with 1.0 to make one drawing unit equal to 1.0 ARToolKit units (usually millimeters).
-		arglCameraViewRH(gPatt_trans_A, m, VIEW_SCALEFACTOR);
-		glLoadMatrixd(m);
-
-
-		// All lighting and geometry to be drawn relative to the marker goes here.
-
-		draw();
-
-
-	}// gPatt_found
+	} 		// gPatt_found
 	// Setup argl library for current context.
 
 	// Any 2D overlays go here.

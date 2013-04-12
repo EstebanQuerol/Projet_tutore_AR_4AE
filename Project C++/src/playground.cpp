@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 
 //OpenGL includes
 #include <GL/glew.h>
@@ -37,6 +38,8 @@ using namespace glm;
 #define VIEW_SCALEFACTOR		0.012		// 1.0 ARToolKit unit becomes 0.025 of my OpenGL units.
 #define VIEW_DISTANCE_MIN		0.1			// Objects closer to the camera than this will not be displayed.
 #define VIEW_DISTANCE_MAX		100.0		// Objects further away from the camera than this will not be displayed.
+#define NEXT					1
+#define PREV					0
 
 // ============================================================================
 //	Global variables
@@ -120,6 +123,11 @@ GLuint uvbuffer;
 char * imgpath="../Images/Pedro_Company.jpg";
 char * img1="../Images/Pedro_Company.jpg";
 char * img2="../Images/aperture-science.bmp";
+
+char prev[250];
+char courante[250];
+char next[250];
+
 //imgpath=img1;
 
 
@@ -127,15 +135,59 @@ char * img2="../Images/aperture-science.bmp";
 //imgpath[1]="../Images/aperture-science.jpg";
 static int createImage(void);
 
-void switchimage(void){
-	if (imgpath==img1){
-		imgpath=img2;
-		createImage();
+void switchimage(int sens){
+
+	struct dirent *lecture;
+	DIR *rep;
+	char* aux;
+	char* auxbis;
+	char* dir="../Images/";
+
+	if (sens == NEXT) {
+		if (next!=courante){
+			rep = opendir(dir);
+			strcpy(prev,courante);
+			strcpy(courante,next);
+			while ((lecture = readdir(rep))) {
+				aux=lecture->d_name;
+				if (aux[0]!='.')
+				if  (aux==courante){
+					if ((lecture = readdir(rep))){
+						aux=lecture->d_name;
+					}
+					exit;
+				}
+			}
+			closedir(rep);
+			strcpy(next,dir);
+			strcat(next,aux);
+
+		}
 	}
-	else{
-		imgpath=img1;
-		createImage();
+	else if (sens == PREV) {
+		if (prev!=courante){
+			rep = opendir("../Images" );
+			strcpy(next,courante);
+			strcpy(courante,prev);
+			while ((lecture = readdir(rep))) {
+				aux=auxbis;
+				auxbis=lecture->d_name;
+				if (auxbis[0]!='.')
+				if (auxbis==courante) {
+					auxbis=aux;
+					exit;
+				}
+			}
+
+			closedir(rep);
+			strcpy(prev,dir);
+			strcat(prev,auxbis);
+		}
 	}
+	fprintf(stdout,"prev: %s \n courante: %s \n next:%s \n",prev,courante,next);
+
+	imgpath=courante;
+	createImage();
 }
 /******************************************/
 /*Functions*/
@@ -381,7 +433,7 @@ static void Idle(void)
 			gPatt_found_NEXT = FALSE;
 			if (etat_NEXT==TRUE) {
 				etat_NEXT=FALSE;
-				switchimage();
+				switchimage(NEXT);
 			}
 		}
 
@@ -404,7 +456,7 @@ static void Idle(void)
 			gPatt_found_PREV = FALSE;
 			if (etat_PREV==TRUE) {
 				etat_PREV=FALSE;
-				switchimage();
+				switchimage(PREV);
 			}
 		}
 
@@ -552,7 +604,7 @@ void keycheck(unsigned char in_key,int mouse_x,int mouse_y){
 
 	}
 	if(in_key=='n'){
-		switchimage();
+		switchimage(NEXT);
 	}
 }
 
@@ -565,7 +617,7 @@ int main (int argc, char** argv){
 		char *vconf="Data\\WDM_camera_flipV.xml";
 #else
 		//char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
-		char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! videoscale ! video/x-raw-yuv,width=620,height=460 ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
+		char *vconf="v4l2src device=/dev/video1 use-fixed-fps=false ! videoscale ! video/x-raw-yuv,width=620,height=460 ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
 #endif
 		const char *patt_I  = "../../Ressources/Patterns/I.pat";
 		const char *patt_N  = "../../Ressources/Patterns/N.pat";

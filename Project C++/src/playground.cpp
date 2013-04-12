@@ -121,7 +121,7 @@ GLuint uvbuffer;
 //Image path
 //For now paths are static but looking to do it dynamic in the future
 char * imgpath="";
-char* dir="../Images/";
+char* dir="/media/PENDRIVE/site/images/images/";
 
 char prev[250];
 char courante[250];
@@ -144,7 +144,7 @@ void switchimage(int sens){
 	//char dern[250];
 	int REFAIRE=1;
 
-	//Récupération du premier et dernier element du dosier
+	//Récupération du premier element du dosier
 	rep = opendir(dir);
 	while ((REFAIRE==1) && (lecture = readdir(rep))){
 		aux=lecture->d_name;
@@ -459,29 +459,6 @@ static void Idle(void)
 
 		k = -1;
 		for (j = 0; j < marker_num; j++) {
-			if (marker_info[j].id == gPatt_id_NEXT) {
-				if (k == -1) k = j; // First marker detected.
-				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
-			}
-		}
-
-		if (k != -1) {
-			// Get the transformation between the marker and the real camera into gPatt_trans.
-			arGetTransMat(&(marker_info[k]), gPatt_centre_NEXT, gPatt_width_NEXT, gPatt_trans_NEXT);
-			gPatt_found_NEXT = TRUE;
-			if (etat_NEXT==FALSE) {
-				etat_NEXT=TRUE;
-			}
-		} else {
-			gPatt_found_NEXT = FALSE;
-			if (etat_NEXT==TRUE && etat_PREV==TRUE) {
-				etat_NEXT=FALSE;
-				switchimage(NEXT);
-			}
-		}
-
-		k = -1;
-		for (j = 0; j < marker_num; j++) {
 			if (marker_info[j].id == gPatt_id_PREV) {
 				if (k == -1) k = j; // First marker detected.
 				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
@@ -500,6 +477,29 @@ static void Idle(void)
 			if (etat_PREV==TRUE && etat_NEXT==TRUE) {
 				etat_PREV=FALSE;
 				switchimage(PREV);
+			}
+		}
+
+		k = -1;
+		for (j = 0; j < marker_num; j++) {
+			if (marker_info[j].id == gPatt_id_NEXT) {
+				if (k == -1) k = j; // First marker detected.
+				else if(marker_info[j].cf > marker_info[k].cf) k = j; // Higher confidence marker detected.
+			}
+		}
+
+		if (k != -1) {
+			// Get the transformation between the marker and the real camera into gPatt_trans.
+			arGetTransMat(&(marker_info[k]), gPatt_centre_NEXT, gPatt_width_NEXT, gPatt_trans_NEXT);
+			gPatt_found_NEXT = TRUE;
+			if (etat_NEXT==FALSE) {
+				etat_NEXT=TRUE;
+			}
+		} else {
+			gPatt_found_NEXT = FALSE;
+			if (etat_NEXT==TRUE && etat_PREV==TRUE) {
+				etat_NEXT=FALSE;
+				switchimage(NEXT);
 			}
 		}
 

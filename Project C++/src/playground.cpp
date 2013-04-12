@@ -121,7 +121,7 @@ GLuint uvbuffer;
 //Image path
 //For now paths are static but looking to do it dynamic in the future
 char * imgpath="";
-char* dir="/media/PENDRIVE/site/images/images/";
+char* dir="../Images/";
 
 char prev[250];
 char courante[250];

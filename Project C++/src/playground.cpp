@@ -142,6 +142,8 @@ void switchimage(int sens){
 	char* aux;
 	char* auxbis;
 	char* dir="../Images/";
+	int REFAIRE=1;
+	strcpy(aux,prev);
 
 	if (sens == NEXT) {
 		if (next!=courante){
@@ -151,7 +153,7 @@ void switchimage(int sens){
 			while ((lecture = readdir(rep))) {
 				aux=lecture->d_name;
 				if (aux[0]!='.')
-				if  (aux==courante){
+				if  (strcmp(aux,courante)){
 					if ((lecture = readdir(rep))){
 						aux=lecture->d_name;
 					}
@@ -166,25 +168,29 @@ void switchimage(int sens){
 	}
 	else if (sens == PREV) {
 		if (prev!=courante){
-			rep = opendir("../Images" );
+			rep = opendir(dir);
 			strcpy(next,courante);
 			strcpy(courante,prev);
-			while ((lecture = readdir(rep))) {
-				aux=auxbis;
+			while ((REFAIRE=1) && (lecture = readdir(rep))) {
 				auxbis=lecture->d_name;
-				if (auxbis[0]!='.')
-				if (auxbis==courante) {
-					auxbis=aux;
-					exit;
+				if (auxbis[0]!='.') {
+					if (strcmp(auxbis,courante)) {
+						REFAIRE=0;
+						strcpy(prev,dir);
+						strcat(prev,aux);
+					}
+					else {
+						REFAIRE=1;
+					}
+					aux=auxbis;
 				}
 			}
-
 			closedir(rep);
-			strcpy(prev,dir);
-			strcat(prev,auxbis);
+
 		}
 	}
-	fprintf(stdout,"prev: %s \n courante: %s \n next:%s \n",prev,courante,next);
+	REFAIRE=1;
+	fprintf(stdout," prev: %s \n courante: %s \n next:%s \n",prev,courante,next);
 
 	imgpath=courante;
 	createImage();
@@ -626,6 +632,41 @@ int main (int argc, char** argv){
 		const char *patt_NEXT = "../../Ressources/Patterns/NEXT.pat";
 		const char *patt_PREV = "../../Ressources/Patterns/PREV.pat";
 // ----------------------------------------------------------------------------
+
+		struct dirent *lecture;
+		DIR *rep;
+		char* dir="../Images/";
+		int REFAIRE=1;
+
+		rep = opendir(dir);
+
+		while ((REFAIRE==1) && (lecture = readdir(rep))){
+			if (lecture->d_name[0]!='.') {
+				strcpy(prev,dir);
+				strcat(prev,lecture->d_name);
+				strcpy(courante,dir);
+				strcat(courante,lecture->d_name);
+				strcpy(next,dir);
+				strcat(next,lecture->d_name);
+
+				while ((REFAIRE==1) && (lecture = readdir(rep))){
+					if (lecture->d_name[0]!='.') {
+						strcpy(next,dir);
+						strcat(next,lecture->d_name);
+						REFAIRE=0;
+					}
+					else {
+						REFAIRE=1;
+					}
+				}
+				REFAIRE=0;
+			}
+			else {
+				REFAIRE=1;
+			}
+		}
+		closedir(rep);
+		fprintf(stdout,"\n prev: %s \n courante: %s \n next:%s \n",prev,courante,next);
 
 // Library inits.
 

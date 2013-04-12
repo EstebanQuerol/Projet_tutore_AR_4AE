@@ -120,9 +120,8 @@ GLuint uvbuffer;
 
 //Image path
 //For now paths are static but looking to do it dynamic in the future
-char * imgpath="../Images/Pedro_Company.jpg";
-char * img1="../Images/Pedro_Company.jpg";
-char * img2="../Images/aperture-science.bmp";
+char * imgpath="";
+char* dir="../Images/";
 
 char prev[250];
 char courante[250];
@@ -141,53 +140,88 @@ void switchimage(int sens){
 	DIR *rep;
 	char* aux="";
 	char* auxbis="";
-	char* dir="../Images/";
+	char prem[250];
+	//char dern[250];
 	int REFAIRE=1;
+
+	//Récupération du premier et dernier element du dosier
+	rep = opendir(dir);
+	while ((REFAIRE==1) && (lecture = readdir(rep))){
+		aux=lecture->d_name;
+		if (aux[0]!='.') {
+			strcpy(prem,dir);
+			strcat(prem,aux);
+//			strcpy(dern,dir);
+//			strcat(dern,aux);
+			REFAIRE=0;
+		}
+	}
+//	while (lecture = readdir(rep)){
+//		aux=lecture->d_name;
+//	}
+//	strcpy(dern,dir);
+//	strcat(dern,aux);
+	closedir(rep);
+
+	REFAIRE=1;
 
 
 	if (sens == PREV) {
+		fprintf(stdout,"\t PREV\n");
 		if ((strcmp(prev,courante))){
-			rep = opendir(dir);
 			strcpy(next,courante);
 			strcpy(courante,prev);
-			while ((REFAIRE=1) && (lecture = readdir(rep))) {
-				auxbis=lecture->d_name;
-				if (auxbis[0]!='.') {
-					if (strcmp(auxbis,courante)) {
-						REFAIRE=0;
+			if ((strcmp(prev,prem))){
+				rep = opendir(dir);
+				while ((lecture = readdir(rep))) {
+					if (REFAIRE==1) {
+						aux=lecture->d_name;
 						strcpy(prev,dir);
 						strcat(prev,aux);
+						if (aux[0]!='.') {
+							if (strcmp(prev,courante)) {
+								REFAIRE=1;
+							}
+							else {
+								strcpy(prev,dir);
+								strcat(prev,auxbis);
+								REFAIRE=0;
+							}
+							auxbis=aux;
+						}
 					}
-					else {
-						REFAIRE=1;
-					}
-					aux=auxbis;
 				}
+
+				closedir(rep);
 			}
-
-			closedir(rep);
+			else {
+				strcpy(prev,prem);
+			}
 		}
-
 	}
+
+	REFAIRE=1;
+
 	if (sens == NEXT) {
 		if ((strcmp(next,courante))){
 			rep = opendir(dir);
 			strcpy(prev,courante);
 			strcpy(courante,next);
-			while ((lecture = readdir(rep))) {
+			while ((REFAIRE==1) && (lecture = readdir(rep))) {
 				aux=lecture->d_name;
+				strcpy(next,dir);
+				strcat(next,aux);
 				if (aux[0]!='.')
-				if  (strcmp(aux,courante)){
+				if  (!(strcmp(next,courante))){
 					if ((lecture = readdir(rep))){
 						aux=lecture->d_name;
+						strcpy(next,dir);
+						strcat(next,aux);
 					}
-					exit;
+					REFAIRE=0;
 				}
 			}
 			closedir(rep);
-			strcpy(next,dir);
-			strcat(next,aux);
-
 		}
 	}
 
@@ -638,8 +672,13 @@ int main (int argc, char** argv){
 
 		struct dirent *lecture;
 		DIR *rep;
-		char* dir="../Images/";
 		int REFAIRE=1;
+
+		rep = opendir(dir);
+		while ((lecture = readdir(rep))) {
+			printf("%s\n", lecture->d_name);
+		}
+		closedir(rep);
 
 		rep = opendir(dir);
 

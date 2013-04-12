@@ -139,14 +139,38 @@ void switchimage(int sens){
 
 	struct dirent *lecture;
 	DIR *rep;
-	char* aux;
-	char* auxbis;
+	char* aux="";
+	char* auxbis="";
 	char* dir="../Images/";
 	int REFAIRE=1;
-	strcpy(aux,prev);
 
+
+	if (sens == PREV) {
+		if ((strcmp(prev,courante))){
+			rep = opendir(dir);
+			strcpy(next,courante);
+			strcpy(courante,prev);
+			while ((REFAIRE=1) && (lecture = readdir(rep))) {
+				auxbis=lecture->d_name;
+				if (auxbis[0]!='.') {
+					if (strcmp(auxbis,courante)) {
+						REFAIRE=0;
+						strcpy(prev,dir);
+						strcat(prev,aux);
+					}
+					else {
+						REFAIRE=1;
+					}
+					aux=auxbis;
+				}
+			}
+
+			closedir(rep);
+		}
+
+	}
 	if (sens == NEXT) {
-		if (next!=courante){
+		if ((strcmp(next,courante))){
 			rep = opendir(dir);
 			strcpy(prev,courante);
 			strcpy(courante,next);
@@ -166,30 +190,9 @@ void switchimage(int sens){
 
 		}
 	}
-	else if (sens == PREV) {
-		if (prev!=courante){
-			rep = opendir(dir);
-			strcpy(next,courante);
-			strcpy(courante,prev);
-			while ((REFAIRE=1) && (lecture = readdir(rep))) {
-				auxbis=lecture->d_name;
-				if (auxbis[0]!='.') {
-					if (strcmp(auxbis,courante)) {
-						REFAIRE=0;
-						strcpy(prev,dir);
-						strcat(prev,aux);
-					}
-					else {
-						REFAIRE=1;
-					}
-					aux=auxbis;
-				}
-			}
-			closedir(rep);
 
-		}
-	}
 	REFAIRE=1;
+
 	fprintf(stdout," prev: %s \n courante: %s \n next:%s \n",prev,courante,next);
 
 	imgpath=courante;
@@ -437,7 +440,7 @@ static void Idle(void)
 			}
 		} else {
 			gPatt_found_NEXT = FALSE;
-			if (etat_NEXT==TRUE) {
+			if (etat_NEXT==TRUE && etat_PREV==TRUE) {
 				etat_NEXT=FALSE;
 				switchimage(NEXT);
 			}
@@ -460,7 +463,7 @@ static void Idle(void)
 			}
 		} else {
 			gPatt_found_PREV = FALSE;
-			if (etat_PREV==TRUE) {
+			if (etat_PREV==TRUE && etat_NEXT==TRUE) {
 				etat_PREV=FALSE;
 				switchimage(PREV);
 			}
@@ -623,7 +626,7 @@ int main (int argc, char** argv){
 		char *vconf="Data\\WDM_camera_flipV.xml";
 #else
 		//char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
-		char *vconf="v4l2src device=/dev/video1 use-fixed-fps=false ! videoscale ! video/x-raw-yuv,width=620,height=460 ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
+		char *vconf="v4l2src device=/dev/video0 use-fixed-fps=false ! videoscale ! video/x-raw-yuv,width=620,height=460 ! ffmpegcolorspace ! capsfilter caps=video/x-raw-rgb,bpp=24 ! identity name=artoolkit ! fakesink";
 #endif
 		const char *patt_I  = "../../Ressources/Patterns/I.pat";
 		const char *patt_N  = "../../Ressources/Patterns/N.pat";

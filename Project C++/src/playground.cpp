@@ -323,7 +323,8 @@ static void draw(void){
 
 
 
-	glClear(GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 
 	glBegin (GL_QUADS);
@@ -732,7 +733,8 @@ int main (int argc, char** argv){
 	} else {
 		glutInitWindowSize(prefWidth, prefHeight);
 		glutCreateWindow(argv[0]);
-		glutSetWindowTitle ("Playground");
+		glutSetWindowTitle ("Desktop Enhancing Application");
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 

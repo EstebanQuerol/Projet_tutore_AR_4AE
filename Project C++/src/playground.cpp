@@ -29,8 +29,7 @@ using namespace glm;
 #include <AR/gsub_lite.h>
 
 //Own functions includes
-//#include <shader.hpp>
-//#include <texture.hpp>
+
 
 // ============================================================================
 //	Constants
@@ -40,6 +39,7 @@ using namespace glm;
 #define VIEW_DISTANCE_MAX		100.0		// Objects further away from the camera than this will not be displayed.
 #define NEXT					1
 #define PREV					0
+#define Tsample					0.1
 
 // ============================================================================
 //	Global variables
@@ -99,6 +99,13 @@ static int			gPatt_id_PREV;				// Per-marker, but we are using only 1 marker.
 
 static int			etat_PREV = TRUE;
 static int			etat_NEXT = TRUE;
+
+
+static double		gPatt_trans_A_Old[3][4];		//old transformation matrix
+static double		gPatt_trans_S_Old[3][4];
+static double		gPatt_trans_N_Old[3][4];
+static double		gPatt_trans_I_Old[3][4];
+
 
 // Marker detection.
 static int			gARTThreshhold = 100;
@@ -235,7 +242,28 @@ void switchimage(int sens){
 /******************************************/
 /*Functions*/
 /******************************************/
+float checkMotion(double	gPatt_trans_A[3][4],double	gPatt_trans_A_Old[3][4]){
+	float S=0.0;
+	int i=0;
+	int j=0;
+	for(i=0;i<3;i++){
+		for(j=0;j<4;j++){
+			S+=(gPatt_trans_A[i][j]-gPatt_trans_A_Old[i][j])*(gPatt_trans_A[i][j]-gPatt_trans_A_Old[i][j]);
+		}
+	}
+	printf("%f \n\n",S);
+	return S;
+}
+void saveMatrix(double	gPatt_trans_A[3][4],double	gPatt_trans_A_Old[3][4]){
+	int i=0;
+	int j=0;
+	for(i=0;i<3;i++){
+		for(j=0;j<4;j++){
+			gPatt_trans_A_Old[i][j]=gPatt_trans_A[i][j];
+		}
+	}
 
+}
 static int setupCamera(const char *cparam_name, char *vconf, ARParam *cparam)
 {
     ARParam			wparam;
@@ -322,26 +350,31 @@ static int createImage(void){
 static void draw(void){
 
 
+	//glPushMatrix(); // Save world coordinate system.
 
-	//glClear(GL_DEPTH_BUFFER_BIT);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glTranslatef(-0.75, 0.0, 0.0); // Place base of cube on marker surface.
+	glClear(GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 
 	glBegin (GL_QUADS);
-			   glTexCoord2f(0.0f, 0.0f);
+			   glTexCoord2f(0.0f, 1.0f);
 			   glVertex3f(0.0f, 0.0f,  0.0f);  // Bottom Left Of The Texture and Quad
 
-			   glTexCoord2f(1.0f, 0.0f);
-			   glVertex3f(1.5f, 0.0f,  0.0f);  // Bottom Left Of The Texture and Quad
-
 			   glTexCoord2f(1.0f, 1.0f);
-			   glVertex3f(1.5f, 2.0f,  0.0f);  // Bottom Left Of The Texture and Quad
+			   glVertex3f(1.5f, 0.0f,  0.0f);
+
+			   glTexCoord2f(1.0f, 0.0f);
+			   glVertex3f(1.5f, 2.0f,  0.0f);
 
 
-			   glTexCoord2f(0.0f, 1.0f);
-			   glVertex3f(0.0f, 2.0f,  0.0f);  // Bottom Left Of The Texture and Quad
+			   glTexCoord2f(0.0f, 0.0f);
+			   glVertex3f(0.0f, 2.0f,  0.0f);
 
 	glEnd();
+
+
+	//glPopMatrix();	// Restore world coordinate system.
 
 }
 
@@ -375,7 +408,7 @@ static void Idle(void)
 	// Find out how long since Idle() last ran.
 	ms = glutGet(GLUT_ELAPSED_TIME);
 	s_elapsed = (float)(ms - ms_prev) * 0.001;
-	if (s_elapsed < 0.01f) return; // Don't update more often than 100 Hz.
+	if (s_elapsed <Tsample * 1.0f) return; // Don't update more often than 100 Hz.
 	ms_prev = ms;
 
 	// Update drawing.
@@ -403,8 +436,12 @@ static void Idle(void)
 		}
 
 		if (k != -1) {
+			saveMatrix(gPatt_trans_I,gPatt_trans_I_Old);
 			// Get the transformation between the marker and the real camera into gPatt_trans.
 			arGetTransMat(&(marker_info[k]), gPatt_centre_I, gPatt_width_I, gPatt_trans_I);
+			if(checkMotion(gPatt_trans_I,gPatt_trans_I_Old)<=50.0){
+				saveMatrix(gPatt_trans_I_Old,gPatt_trans_I);
+			}
 			gPatt_found_I = TRUE;
 		} else {
 			gPatt_found_I = FALSE;
@@ -419,8 +456,12 @@ static void Idle(void)
 		}
 
 		if (k != -1) {
+			saveMatrix(gPatt_trans_N,gPatt_trans_N_Old);
 			// Get the transformation between the marker and the real camera into gPatt_trans.
 			arGetTransMat(&(marker_info[k]), gPatt_centre_N, gPatt_width_N, gPatt_trans_N);
+			if(checkMotion(gPatt_trans_N,gPatt_trans_N_Old)<=50.0){
+				saveMatrix(gPatt_trans_N_Old,gPatt_trans_N);
+			}
 			gPatt_found_N = TRUE;
 		} else {
 			gPatt_found_N = FALSE;
@@ -435,8 +476,13 @@ static void Idle(void)
 		}
 
 		if (k != -1) {
+			saveMatrix(gPatt_trans_S,gPatt_trans_S_Old);
 			// Get the transformation between the marker and the real camera into gPatt_trans.
 			arGetTransMat(&(marker_info[k]), gPatt_centre_S, gPatt_width_S, gPatt_trans_S);
+			if(checkMotion(gPatt_trans_S,gPatt_trans_S_Old)<=50.0){
+				saveMatrix(gPatt_trans_S_Old,gPatt_trans_S);
+			}
+
 			gPatt_found_S = TRUE;
 		} else {
 			gPatt_found_S = FALSE;
@@ -452,7 +498,12 @@ static void Idle(void)
 
 		if (k != -1) {
 			// Get the transformation between the marker and the real camera into gPatt_trans.
+			saveMatrix(gPatt_trans_A,gPatt_trans_A_Old);
 			arGetTransMat(&(marker_info[k]), gPatt_centre_A, gPatt_width_A, gPatt_trans_A);
+			if(checkMotion(gPatt_trans_A,gPatt_trans_A_Old)<=50.0){
+				saveMatrix(gPatt_trans_A_Old,gPatt_trans_A);
+			}
+
 			gPatt_found_A = TRUE;
 		} else {
 			gPatt_found_A = FALSE;
@@ -652,7 +703,7 @@ void keycheck(unsigned char in_key,int mouse_x,int mouse_y){
 	}
 }
 
-int main (int argc, char** argv){
+int main (int argc, char* argv[]){
 
 	char glutGamemode[32];
 	const char * cparam_name="../../lib/ARToolKit/bin/Data/camera_para.dat";
@@ -671,15 +722,20 @@ int main (int argc, char** argv){
 		const char *patt_PREV = "../../Ressources/Patterns/PREV.pat";
 // ----------------------------------------------------------------------------
 
+		//Recuperation du dossier avec les images
+		if(argc==2){
+			dir=argv[1];
+			printf("Using %s folder for images \n ",argv[0]);
+
+		}else{
+			printf("Using default folder \n ");
+
+		}
 		struct dirent *lecture;
 		DIR *rep;
 		int REFAIRE=1;
 
-		rep = opendir(dir);
-		while ((lecture = readdir(rep))) {
-			printf("%s\n", lecture->d_name);
-		}
-		closedir(rep);
+
 
 		rep = opendir(dir);
 
